@@ -96,7 +96,7 @@ CREATE TABLE Tutoria (
 ## 🎨 Storyboard / Prototipo
 Puedes visualizar el prototipo de la aplicación en los siguientes enlaces:
 - [Diseño en Figma](https://www.figma.com/design/d0TvSYbRHQXQL63LMuxMsj/Community-Tutoring-App?node-id=1-3&m=dev&t=zaDrom7bGK3GjwUq-1)
-- [Diagrama en Draw.io](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Community%20Tutoring%20App.drawio&dark=auto#R...)
+- [Diagrama en Draw.io](https://drive.google.com/file/d/1M9R7WKziW42o52w3bUgcu1iXSihM3AzH/view?usp=sharing)
 
 ---
 
