@@ -6,8 +6,62 @@ package models;
 
 /**
  *
- * @author mdjes
+ * @author Cortez, Manuel;
  */
 public class Estudiante {
-    
+    private int id;
+    private String nombre;
+    private String gradoEscolar;
+    private String telefono;
+    private String escuelaProcedencia;
+
+    public Estudiante() {}
+
+    public Estudiante(int id, String nombre, String gradoEscolar, String telefono, String escuelaProcedencia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.gradoEscolar = gradoEscolar;
+        this.telefono = telefono;
+        this.escuelaProcedencia = escuelaProcedencia;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getGradoEscolar() {
+        return gradoEscolar;
+    }
+
+    public void setGradoEscolar(String gradoEscolar) {
+        this.gradoEscolar = gradoEscolar;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEscuelaProcedencia() {
+        return escuelaProcedencia;
+    }
+
+    public void setEscuelaProcedencia(String escuelaProcedencia) {
+        this.escuelaProcedencia = escuelaProcedencia;
+    }
 }
