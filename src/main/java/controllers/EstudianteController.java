@@ -6,7 +6,7 @@ package controllers;
 
 /**
  *
- * @author mdjes
+ * @author Cortez, Manuel;
  */
 public class EstudianteController {
     
