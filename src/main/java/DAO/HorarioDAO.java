@@ -21,7 +21,7 @@ import java.util.List;
 public class HorarioDAO implements IHorarioDAO {
 
     @Override
-    public void create(Horario horario) {
+    public boolean create(Horario horario) {
         String insert = "INSERT INTO Horario(idHorario, dia, horaInicio, horaFin, idTutor) VALUES(?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)){
@@ -31,8 +31,10 @@ public class HorarioDAO implements IHorarioDAO {
             ps.setString(4, horario.getHoraFin());
             ps.setInt(5, horario.getTutor().getId());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex){
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -49,13 +51,11 @@ public class HorarioDAO implements IHorarioDAO {
                 horario.setDia(rs.getString("dia"));
                 horario.setHoraInicio(rs.getString("horaInicio"));
                 horario.setHoraFin(rs.getString("horaFin"));
-                Tutor tutor = new Tutor();
-                tutor.setId(rs.getInt("idTutor"));
-                tutor.setNombre(rs.getString("nombre"));
-                tutor.setTelefono(rs.getString("telefono"));
-                tutor.setCorreo(rs.getString("correo"));
-                tutor.setEspecialidad(rs.getString("especialidad"));
-                horario.setTutor(tutor);
+                horario.setTutor(new Tutor(rs.getInt("idTutor"),
+                        rs.getString("nombre"),
+                        rs.getString("telefono"),
+                        rs.getString("correo"),
+                        rs.getString("especialidad")));
                 return horario;
             }
         } catch (SQLException ex){
@@ -65,7 +65,7 @@ public class HorarioDAO implements IHorarioDAO {
     }
 
     @Override
-    public void update(Horario horario) {
+    public boolean update(Horario horario) {
         String update = "UPDATE Horario SET dia = ?, horaInicio = ?, horaFin = ?, idTutor = ? WHERE idHorario = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(update)){
@@ -75,20 +75,24 @@ public class HorarioDAO implements IHorarioDAO {
             ps.setInt(4, horario.getTutor().getId());
             ps.setInt(5, horario.getId());
             ps.executeUpdate();
+            return  true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void delete(int idHorario) {
+    public boolean delete(int idHorario) {
         String delete = "DELETE FROM Horario WHERE idHorario = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(delete);) {
             ps.setInt(1, idHorario);
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -105,13 +109,11 @@ public class HorarioDAO implements IHorarioDAO {
                 horario.setDia(rs.getString("dia"));
                 horario.setHoraInicio(rs.getString("horaInicio"));
                 horario.setHoraFin(rs.getString("horaFin"));
-                Tutor tutor = new Tutor();
-                tutor.setId(rs.getInt("idTutor"));
-                tutor.setNombre(rs.getString("nombre"));
-                tutor.setTelefono(rs.getString("telefono"));
-                tutor.setCorreo(rs.getString("correo"));
-                tutor.setEspecialidad(rs.getString("especialidad"));
-                horario.setTutor(tutor);
+                horario.setTutor(new Tutor(rs.getInt("idTutor"),
+                        rs.getString("nombre"),
+                        rs.getString("telefono"),
+                        rs.getString("correo"),
+                        rs.getString("especialidad")));
                 lista.add(horario);
             }
         }  catch (SQLException ex) {

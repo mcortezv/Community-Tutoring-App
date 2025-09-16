@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface IMateriaDAO {
 
-    void create(Materia materia);
+    boolean create(Materia materia);
 
     Materia read(int idMateria);
 
-    void update(Materia materia);
+    boolean update(Materia materia);
 
-    void delete(int idMateria);
+    boolean delete(int idMateria);
 
     List<Materia> readAll();
 }

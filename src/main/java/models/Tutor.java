@@ -18,6 +18,14 @@ public class Tutor {
 
     public Tutor(){}
 
+    public Tutor(int id, String nombre, String telefono, String correo, String especialidad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.especialidad = especialidad;
+    }
+
     public Tutor(String nombre, String telefono, String correo, String especialidad) {
         this.id = contador++;
         this.nombre = nombre;

@@ -20,7 +20,7 @@ import java.util.List;
 public class TutorDAO implements ITutorDAO {
 
     @Override
-    public void create(Tutor tutor) {
+    public boolean create(Tutor tutor) {
         String insert = "INSERT INTO Tutor(idTutor, nombreTutor, telefonoTutor, correo, especialidad) VALUES(?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)) {
@@ -30,8 +30,10 @@ public class TutorDAO implements ITutorDAO {
             ps.setString(4, tutor.getCorreo());
             ps.setString(5, tutor.getEspecialidad());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -59,7 +61,7 @@ public class TutorDAO implements ITutorDAO {
     }
 
     @Override
-    public void update(Tutor tutor) {
+    public boolean update(Tutor tutor) {
         String update = "UPDATE Tutor SET nombreTutor = ?, telefonoTutor = ?, correo = ?, especialidad = ? WHERE idTutor = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(update)){
@@ -69,20 +71,24 @@ public class TutorDAO implements ITutorDAO {
             ps.setString(4, tutor.getEspecialidad());
             ps.setInt(5, tutor.getId());
             ps.executeUpdate();
+            return  true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void delete(int idTutor) {
+    public boolean delete(int idTutor) {
         String delete = "DELETE FROM Tutor WHERE idTutor = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(delete);) {
             ps.setInt(1, idTutor);
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 

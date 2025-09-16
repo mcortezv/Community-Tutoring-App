@@ -17,7 +17,7 @@ import java.util.List;
 public class EstudianteDAO implements IEstudianteDAO {
 
     @Override
-    public void create(Estudiante estudiante) {
+    public boolean create(Estudiante estudiante) {
         String insert = "INSERT INTO Estudiante(idEstudiante, nombreEstudiante, gradoEscolar, edad, telefonoEstudiante, escuelaProcedencia) VALUES(?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
             PreparedStatement ps = connection.prepareStatement(insert)) {
@@ -28,8 +28,10 @@ public class EstudianteDAO implements IEstudianteDAO {
             ps.setString(5, estudiante.getTelefono());
             ps.setString(6, estudiante.getEscuelaProcedencia());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -58,7 +60,7 @@ public class EstudianteDAO implements IEstudianteDAO {
     }
 
     @Override
-    public void update(Estudiante estudiante) {
+    public boolean update(Estudiante estudiante) {
         String update = "UPDATE Estudiante SET nombreEstudiante = ?, gradoEscolar = ?, edad = ?, telefonoEstudiante = ?, escuelaProcedencia = ? WHERE idEstudiante = ?";
         try (Connection connection = ConnectionDB.getConnection();
             PreparedStatement ps = connection.prepareStatement(update)){
@@ -69,20 +71,24 @@ public class EstudianteDAO implements IEstudianteDAO {
             ps.setString(5, estudiante.getEscuelaProcedencia());
             ps.setInt(6, estudiante.getId());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void delete(int idEstudiante) {
+    public boolean delete(int idEstudiante) {
         String delete = "DELETE FROM Estudiante WHERE idEstudiante = ?";
         try (Connection connection = ConnectionDB.getConnection();
             PreparedStatement ps = connection.prepareStatement(delete);) {
             ps.setInt(1, idEstudiante);
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 

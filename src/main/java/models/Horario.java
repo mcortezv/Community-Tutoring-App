@@ -18,6 +18,14 @@ public class Horario {
 
     public Horario(){}
 
+    public Horario(int id, String dia, String horaInicio, String horaFin, Tutor tutor) {
+        this.id = id;
+        this.dia = dia;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.tutor = tutor;
+    }
+
     public Horario(String dia, String horaInicio, String horaFin, Tutor tutor) {
         this.id = contador++;
         this.dia = dia;

@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface IHorarioDAO {
 
-    void create(Horario horario);
+    boolean create(Horario horario);
 
     Horario read(int idHorario);
 
-    void update(Horario horario);
+    boolean update(Horario horario);
 
-    void delete(int idHorario);
+    boolean delete(int idHorario);
 
     List<Horario> readAll();
 }

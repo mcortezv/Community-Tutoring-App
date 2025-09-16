@@ -23,7 +23,7 @@ import java.util.List;
 public class TutoriaDAO implements ITutoriaDAO {
 
     @Override
-    public void create(Tutoria tutoria) {
+    public boolean create(Tutoria tutoria) {
         String insert = "INSERT INTO Tutoria(idTutoria, fecha, hora, estado, idTutor, idEstudiante, idMateria) VALUES(?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)) {
@@ -35,8 +35,10 @@ public class TutoriaDAO implements ITutoriaDAO {
             ps.setInt(6, tutoria.getEstudiante().getId());
             ps.setInt(7, tutoria.getMateria().getId());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -55,27 +57,21 @@ public class TutoriaDAO implements ITutoriaDAO {
                     tutoria.setFecha(rs.getString("fecha"));
                     tutoria.setHora(rs.getString("hora"));
                     tutoria.setEstado(rs.getString("estado"));
-                    Tutor tutor = new Tutor();
-                    tutor.setId(rs.getInt("idTutor"));
-                    tutor.setNombre(rs.getString("nombreTutor"));
-                    tutor.setTelefono(rs.getString("telefonoTutor"));
-                    tutor.setCorreo(rs.getString("correo"));
-                    tutor.setEspecialidad(rs.getString("especialidad"));
-                    tutoria.setTutor(tutor);
-                    Estudiante estudiante = new Estudiante();
-                    estudiante.setId(rs.getInt("idEstudiante"));
-                    estudiante.setNombre(rs.getString("nombreEstudiante"));
-                    estudiante.setGradoEscolar(rs.getString("gradoEscolar"));
-                    estudiante.setEdad(rs.getInt("edad"));
-                    estudiante.setTelefono(rs.getString("telefonoEstudiante"));
-                    estudiante.setEscuelaProcedencia(rs.getString("escuelaProcedencia"));
-                    tutoria.setEstudiante(estudiante);
-                    Materia materia = new Materia();
-                    materia.setId(rs.getInt("idMateria"));
-                    materia.setNombre(rs.getString("nombreMateria"));
-                    materia.setNivel(rs.getString("nivel"));
-                    materia.setDescripcion(rs.getString("descripcion"));
-                    tutoria.setMateria(materia);
+                    tutoria.setTutor(new Tutor(rs.getInt("idTutor"),
+                            rs.getString("nombreTutor"),
+                            rs.getString("telefonoTutor"),
+                            rs.getString("correo"),
+                            rs.getString("especialidad")));
+                    tutoria.setEstudiante(new Estudiante(rs.getInt("idEstudiante"),
+                            rs.getString("nombreEstudiante"),
+                            rs.getString("gradoEscolar"),
+                            rs.getInt("edad"),
+                            rs.getString("telefonoEstudiante"),
+                            rs.getString("escuelaProcedencia")));
+                    tutoria.setMateria(new Materia(rs.getInt("idMateria"),
+                            rs.getString("nombreMateria"),
+                            rs.getString("nivel"),
+                            rs.getString("descripcion")));
                     return tutoria;
                 }
             }
@@ -86,7 +82,7 @@ public class TutoriaDAO implements ITutoriaDAO {
     }
 
     @Override
-    public void update(Tutoria tutoria) {
+    public boolean update(Tutoria tutoria) {
         String update = "UPDATE Tutoria SET fecha = ?, hora = ?, estado = ?, idTutor = ?, idEstudiante = ?, idMateria = ? WHERE idTutoria = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(update)){
@@ -98,20 +94,24 @@ public class TutoriaDAO implements ITutoriaDAO {
             ps.setInt(6, tutoria.getMateria().getId());
             ps.setInt(7, tutoria.getId());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void delete(int idTutoria) {
+    public boolean delete(int idTutoria) {
         String delete = "DELETE FROM Tutoria WHERE idTutoria = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(delete);) {
             ps.setInt(1, idTutoria);
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -130,27 +130,21 @@ public class TutoriaDAO implements ITutoriaDAO {
                 tutoria.setFecha(rs.getString("fecha"));
                 tutoria.setHora(rs.getString("hora"));
                 tutoria.setEstado(rs.getString("estado"));
-                Tutor tutor = new Tutor();
-                tutor.setId(rs.getInt("idTutor"));
-                tutor.setNombre(rs.getString("nombreTutor"));
-                tutor.setTelefono(rs.getString("telefonoTutor"));
-                tutor.setCorreo(rs.getString("correo"));
-                tutor.setEspecialidad(rs.getString("especialidad"));
-                tutoria.setTutor(tutor);
-                Estudiante estudiante = new Estudiante();
-                estudiante.setId(rs.getInt("idEstudiante"));
-                estudiante.setNombre(rs.getString("nombreEstudiante"));
-                estudiante.setGradoEscolar(rs.getString("gradoEscolar"));
-                estudiante.setEdad(rs.getInt("edad"));
-                estudiante.setTelefono(rs.getString("telefonoEstudiante"));
-                estudiante.setEscuelaProcedencia(rs.getString("escuelaProcedencia"));
-                tutoria.setEstudiante(estudiante);
-                Materia materia = new Materia();
-                materia.setId(rs.getInt("idMateria"));
-                materia.setNombre(rs.getString("nombreMateria"));
-                materia.setNivel(rs.getString("nivel"));
-                materia.setDescripcion(rs.getString("descripcion"));
-                tutoria.setMateria(materia);
+                tutoria.setTutor(new Tutor(rs.getInt("idTutor"),
+                        rs.getString("nombreTutor"),
+                        rs.getString("telefonoTutor"),
+                        rs.getString("correo"),
+                        rs.getString("especialidad")));
+                tutoria.setEstudiante(new Estudiante(rs.getInt("idEstudiante"),
+                        rs.getString("nombreEstudiante"),
+                        rs.getString("gradoEscolar"),
+                        rs.getInt("edad"),
+                        rs.getString("telefonoEstudiante"),
+                        rs.getString("escuelaProcedencia")));
+                tutoria.setMateria(new Materia(rs.getInt("idMateria"),
+                        rs.getString("nombreMateria"),
+                        rs.getString("nivel"),
+                        rs.getString("descripcion")));
                 lista.add(tutoria);
             }
         }  catch (SQLException ex) {

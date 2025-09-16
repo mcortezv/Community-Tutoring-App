@@ -19,6 +19,15 @@ public class Estudiante {
 
     public Estudiante() {}
 
+    public Estudiante(int id, String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.gradoEscolar = gradoEscolar;
+        this.edad = edad;
+        this.telefono = telefono;
+        this.escuelaProcedencia = escuelaProcedencia;
+    }
+
     public Estudiante(String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia) {
         this.id = contador++;
         this.nombre = nombre;

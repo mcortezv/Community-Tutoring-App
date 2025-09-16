@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface ITutoriaDAO {
 
-    void create(Tutoria tutoria);
+    boolean create(Tutoria tutoria);
 
     Tutoria read(int idTutoria);
 
-    void update(Tutoria tutoria);
+    boolean update(Tutoria tutoria);
 
-    void delete(int idTutoria);
+    boolean delete(int idTutoria);
 
     List<Tutoria> readAll();
 }

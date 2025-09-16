@@ -20,7 +20,7 @@ import java.util.List;
 public class MateriaDAO implements IMateriaDAO {
 
     @Override
-    public void create(Materia materia) {
+    public boolean create(Materia materia) {
         String insert = "INSERT INTO Materia(idMateria, nombreMateria, nivel, descripcion) VALUES(?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)) {
@@ -29,8 +29,10 @@ public class MateriaDAO implements IMateriaDAO {
             ps.setString(3, materia.getNivel());
             ps.setString(4, materia.getDescripcion());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -57,7 +59,7 @@ public class MateriaDAO implements IMateriaDAO {
     }
 
     @Override
-    public void update(Materia materia) {
+    public boolean update(Materia materia) {
         String update = "UPDATE Materia SET nombreMateria = ?, nivel = ?, descripcion = ? WHERE idMateria = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(update)){
@@ -66,20 +68,24 @@ public class MateriaDAO implements IMateriaDAO {
             ps.setString(3, materia.getDescripcion());
             ps.setInt(4, materia.getId());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void delete(int idMateria) {
+    public boolean delete(int idMateria) {
         String delete = "DELETE FROM Materia WHERE idMateria = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(delete);) {
             ps.setInt(1, idMateria);
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 

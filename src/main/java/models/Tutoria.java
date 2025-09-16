@@ -20,6 +20,16 @@ public class Tutoria {
 
     public Tutoria() {}
 
+    public Tutoria(int id, String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.estado = estado;
+        this.tutor = tutor;
+        this.estudiante = estudiante;
+        this.materia = materia;
+    }
+
     public Tutoria(String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia) {
         this.id = contador++;
         this.fecha = fecha;
