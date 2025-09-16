@@ -13,17 +13,17 @@ public class Estudiante {
     private int id;
     private String nombre;
     private String gradoEscolar;
+    private int edad;
     private String telefono;
     private String escuelaProcedencia;
 
-    public Estudiante() {
-        this.id = contador++;
-    }
+    public Estudiante() {}
 
-    public Estudiante(String nombre, String gradoEscolar, String telefono, String escuelaProcedencia) {
+    public Estudiante(String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia) {
         this.id = contador++;
         this.nombre = nombre;
         this.gradoEscolar = gradoEscolar;
+        this.edad = edad;
         this.telefono = telefono;
         this.escuelaProcedencia = escuelaProcedencia;
     }
@@ -48,6 +48,14 @@ public class Estudiante {
         return gradoEscolar;
     }
 
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
     public void setGradoEscolar(String gradoEscolar) {
         this.gradoEscolar = gradoEscolar;
     }
@@ -70,8 +78,8 @@ public class Estudiante {
 
     @Override
     public String toString() {
-        return String.format("\n%-20s -->  %d \n%-20s -->  %s \n%-20s -->  %s \n%-20s -->  %s \n%-20s -->  %s \n",
-                "Estudiante", this.getId(), "Nombre", this.getNombre(), "Grado Escolar", this.getGradoEscolar(),
-                "Telefono", this.getTelefono(), "Escuela Procedencia", this.getEscuelaProcedencia());
+        return String.format("\n%-20s -->  %d \n%-20s -->  %s \n%-20s -->  %s \n%-20s -->  %d \n%-20s -->  %s \n%-20s -->  %s \n",
+                "Estudiante", this.getId(), "Nombre", this.getNombre(), "Grado Escolar", this.getGradoEscolar(), "Edad",
+                this.getEdad(), "Telefono", this.getTelefono(), "Escuela Procedencia", this.getEscuelaProcedencia());
     }
 }

@@ -16,9 +16,7 @@ public class Horario {
     private String horaFin;
     private Tutor tutor;
 
-    public Horario(){
-        this.id = contador++;
-    }
+    public Horario(){}
 
     public Horario(String dia, String horaInicio, String horaFin, Tutor tutor) {
         this.id = contador++;

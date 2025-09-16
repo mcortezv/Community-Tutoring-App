@@ -18,9 +18,7 @@ public class Tutoria {
     private Estudiante estudiante;
     private Materia materia;
 
-    public Tutoria() {
-        this.id = contador++;
-    }
+    public Tutoria() {}
 
     public Tutoria(String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia) {
         this.id = contador++;

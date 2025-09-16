@@ -44,50 +44,50 @@ CREATE DATABASE tutorias;
 USE tutorias;
 
 CREATE TABLE Estudiante (
- id_estudiante INT PRIMARY KEY,
- nombre VARCHAR(40),
- grado_escolar VARCHAR(20),
- edad INT,
- telefono VARCHAR(20),
- escuela_procedencia VARCHAR(30)
+idEstudiante INT PRIMARY KEY,
+nombreEstudiante VARCHAR(40),
+gradoEscolar VARCHAR(20),
+edad INT,
+telefonoEstudiante VARCHAR(20),
+escuelaProcedencia VARCHAR(30)
 );
 
 CREATE TABLE Tutor (
- id_tutor INT PRIMARY KEY,
- nombre VARCHAR(40),
- telefono VARCHAR(20),
- correo_electronico VARCHAR(40),
- especialidad ENUM('Materia', 'Área de conocimiento')
+idTutor INT PRIMARY KEY,
+nombreTutor VARCHAR(40),
+telefonoTutor VARCHAR(20),
+correo VARCHAR(40),
+especialidad VARCHAR(40)
 );
 
 CREATE TABLE Horario (
- id_horario INT,
- dia ENUM('Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'),
- hora_inicio TIME,
- hora_fin TIME,
- id_tutor INT,
- PRIMARY KEY(id_horario, id_tutor),
- FOREIGN KEY (id_tutor) REFERENCES Tutor(id_tutor)
+idHorario INT,
+dia ENUM('Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'),
+horaInicio TIME,
+horaFin TIME,
+idTutor INT,
+PRIMARY KEY(idHorario, idTutor),
+FOREIGN KEY (idTutor) REFERENCES Tutor(idTutor)
 );
 
 CREATE TABLE Materia (
- id_materia INT PRIMARY KEY,
- nombre VARCHAR(40),
- nivel VARCHAR(20),
- descripcion VARCHAR(80)
+idMateria INT PRIMARY KEY,
+nombreMateria VARCHAR(40),
+nivel VARCHAR(20),
+descripcion VARCHAR(80)
 );
 
 CREATE TABLE Tutoria (
- id_tutoria INT PRIMARY KEY,
- fecha DATE,
- hora TIME,
- estado ENUM('Programada','En curso','Completada'),
- id_tutor INT,
- id_estudiante INT,
- id_materia INT,
- FOREIGN KEY (id_tutor) REFERENCES Tutor(id_tutor),
- FOREIGN KEY (id_estudiante) REFERENCES Estudiante(id_estudiante),
- FOREIGN KEY (id_materia) REFERENCES Materia(id_materia)
+idTutoria INT PRIMARY KEY,
+fecha DATE,
+hora TIME,
+estado ENUM('Programada','En curso','Completada'),
+idTutor INT,
+idEstudiante INT,
+idMateria INT,
+FOREIGN KEY (idTutor) REFERENCES Tutor(idTutor),
+FOREIGN KEY (idEstudiante) REFERENCES Estudiante(idEstudiante),
+FOREIGN KEY (idMateria) REFERENCES Materia(idMateria)
 );
 ```
 

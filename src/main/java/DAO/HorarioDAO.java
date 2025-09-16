@@ -3,8 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
+import config.ConnectionDB;
 import interfaces.IHorarioDAO;
 import models.Horario;
+import models.Tutor;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,27 +21,102 @@ import java.util.List;
 public class HorarioDAO implements IHorarioDAO {
 
     @Override
-    public boolean insertar(Horario horario) {
-        return false;
+    public void create(Horario horario) {
+        String insert = "INSERT INTO Horario(idHorario, dia, horaInicio, horaFin, idTutor) VALUES(?, ?, ?, ?, ?)";
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement ps = connection.prepareStatement(insert)){
+            ps.setInt(1, horario.getId());
+            ps.setString(2, horario.getDia());
+            ps.setString(3, horario.getHoraInicio());
+            ps.setString(4, horario.getHoraFin());
+            ps.setInt(5, horario.getTutor().getId());
+            ps.executeUpdate();
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public Horario obtenerPorId(int idHorario) {
+    public Horario read(int idHorario) {
+        String read = "SELECT * FROM Horario INNER JOIN Tutor ON Horario.idTutor = Tutor.idTutor WHERE idHorario = ?";
+        try (Connection connection = ConnectionDB.getConnection();
+            PreparedStatement ps = connection.prepareStatement(read)){
+            ps.setInt(1, idHorario);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                Horario horario = new Horario();
+                horario.setId(rs.getInt("idHorario"));
+                horario.setDia(rs.getString("dia"));
+                horario.setHoraInicio(rs.getString("horaInicio"));
+                horario.setHoraFin(rs.getString("horaFin"));
+                Tutor tutor = new Tutor();
+                tutor.setId(rs.getInt("idTutor"));
+                tutor.setNombre(rs.getString("nombre"));
+                tutor.setTelefono(rs.getString("telefono"));
+                tutor.setCorreo(rs.getString("correo"));
+                tutor.setEspecialidad(rs.getString("especialidad"));
+                horario.setTutor(tutor);
+                return horario;
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public List<Horario> obtenerTodos() {
-        return List.of();
+    public void update(Horario horario) {
+        String update = "UPDATE Horario SET dia = ?, horaInicio = ?, horaFin = ?, idTutor = ? WHERE idHorario = ?";
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement ps = connection.prepareStatement(update)){
+            ps.setString(1, horario.getDia());
+            ps.setString(2, horario.getHoraInicio());
+            ps.setString(3, horario.getHoraFin());
+            ps.setInt(4, horario.getTutor().getId());
+            ps.setInt(5, horario.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public boolean actualizar(Horario horario) {
-        return false;
+    public void delete(int idHorario) {
+        String delete = "DELETE FROM Horario WHERE idHorario = ?";
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement ps = connection.prepareStatement(delete);) {
+            ps.setInt(1, idHorario);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public boolean eliminar(int idHorario) {
-        return false;
+    public List<Horario> readAll() {
+        List<Horario> lista = new ArrayList<>();
+        String read = "SELECT * FROM Horario INNER JOIN Tutor ON Horario.idTutor = Tutor.idTutor";
+        try (Connection connection = ConnectionDB.getConnection();
+             PreparedStatement ps = connection.prepareStatement(read)){
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Horario horario = new Horario();
+                horario.setId(rs.getInt("idHorario"));
+                horario.setDia(rs.getString("dia"));
+                horario.setHoraInicio(rs.getString("horaInicio"));
+                horario.setHoraFin(rs.getString("horaFin"));
+                Tutor tutor = new Tutor();
+                tutor.setId(rs.getInt("idTutor"));
+                tutor.setNombre(rs.getString("nombre"));
+                tutor.setTelefono(rs.getString("telefono"));
+                tutor.setCorreo(rs.getString("correo"));
+                tutor.setEspecialidad(rs.getString("especialidad"));
+                horario.setTutor(tutor);
+                lista.add(horario);
+            }
+        }  catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
     }
 }

@@ -15,9 +15,7 @@ public class Materia {
     private String nivel;
     private String descripcion;
 
-    public Materia(){
-        this.id = contador++;
-    }
+    public Materia(){}
 
     public Materia(String nombre, String nivel, String descripcion) {
         this.id = contador++;

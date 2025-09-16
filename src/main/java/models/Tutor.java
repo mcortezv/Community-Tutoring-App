@@ -13,18 +13,16 @@ public class Tutor {
     private int id;
     private String nombre;
     private String telefono;
-    private String email;
+    private String correo;
     private String especialidad;
 
-    public Tutor(){
-        this.id = contador++;
-    }
+    public Tutor(){}
 
-    public Tutor(String nombre, String telefono, String email, String especialidad) {
+    public Tutor(String nombre, String telefono, String correo, String especialidad) {
         this.id = contador++;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.email = email;
+        this.correo = correo;
         this.especialidad = especialidad;
     }
 
@@ -52,12 +50,12 @@ public class Tutor {
         this.telefono = telefono;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getEspecialidad() {
@@ -72,6 +70,6 @@ public class Tutor {
     public String toString() {
         return String.format("\n%-14s -->  %d \n%-14s -->  %s \n%-14s -->  %s \n%-14s -->  %s \n%-14s -->  %s \n",
                 "Tutor", this.getId(), "Nombre", this.getNombre(), "Telefono", this.getTelefono(),
-                "Correo", this.getEmail(), "Especialidad", this.getEspecialidad());
+                "Correo", this.getCorreo(), "Especialidad", this.getEspecialidad());
     }
 }
