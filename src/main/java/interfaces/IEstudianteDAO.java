@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface IEstudianteDAO {
 
-    boolean insertar(Estudiante estudiante);
+    void create(Estudiante estudiante);
 
-    Estudiante obtenerPorId(int idEstudiante);
+    Estudiante read(int idEstudiante);
 
-    List<Estudiante> obtenerTodos();
+    void update(Estudiante estudiante);
 
-    boolean actualizar(Estudiante estudiante);
+    void delete(int idEstudiante);
 
-    boolean eliminar(int idEstudiante);
+    List<Estudiante> readAll();
 }

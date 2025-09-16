@@ -9,16 +9,19 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Tutor {
+    private static int contador = 1;
     private int id;
     private String nombre;
     private String telefono;
     private String email;
     private String especialidad;
 
-    public Tutor(){}
+    public Tutor(){
+        this.id = contador++;
+    }
 
-    public Tutor(int id, String nombre, String telefono, String email, String especialidad) {
-        this.id = id;
+    public Tutor(String nombre, String telefono, String email, String especialidad) {
+        this.id = contador++;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
@@ -63,5 +66,12 @@ public class Tutor {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\n%-14s -->  %d \n%-14s -->  %s \n%-14s -->  %s \n%-14s -->  %s \n%-14s -->  %s \n",
+                "Tutor", this.getId(), "Nombre", this.getNombre(), "Telefono", this.getTelefono(),
+                "Correo", this.getEmail(), "Especialidad", this.getEspecialidad());
     }
 }

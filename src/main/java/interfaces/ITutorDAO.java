@@ -11,13 +11,14 @@ import java.util.List;
  * @author Cortez, Manuel;
  */
 public interface ITutorDAO {
-    boolean insertar(Tutor tutor);
 
-    Tutor obtenerPorId(int idTutor);
+    void create(Tutor tutor);
 
-    List<Tutor> obtenerTodos();
+    Tutor read(int idTutor);
 
-    boolean actualizar(Tutor tutor);
+    void update(Tutor tutor);
 
-    boolean eliminar(int idTutor);
+    void delete(int idTutor);
+
+    List<Tutor> readAll();
 }

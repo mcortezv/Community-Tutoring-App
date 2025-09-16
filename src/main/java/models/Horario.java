@@ -9,20 +9,23 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Horario {
+    private static int contador = 1;
     private int id;
     private String dia;
     private String horaInicio;
     private String horaFin;
-    private String idTutor;
+    private Tutor tutor;
 
-    public Horario(){}
+    public Horario(){
+        this.id = contador++;
+    }
 
-    public Horario(String idTutor, String horaFin, String horaInicio, String dia, int id) {
-        this.idTutor = idTutor;
-        this.horaFin = horaFin;
-        this.horaInicio = horaInicio;
+    public Horario(String dia, String horaInicio, String horaFin, Tutor tutor) {
+        this.id = contador++;
         this.dia = dia;
-        this.id = id;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.tutor = tutor;
     }
 
     public int getId() {
@@ -57,11 +60,18 @@ public class Horario {
         this.horaFin = horaFin;
     }
 
-    public String getIdTutor() {
-        return idTutor;
+    public Tutor getTutor() {
+        return tutor;
     }
 
-    public void setIdTutor(String idTutor) {
-        this.idTutor = idTutor;
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\n%-13s -->  %d \n%-13s -->  %s \n%-13s -->  %s \n%-13s -->  %s \n%-13s -->  %s \n",
+                "Horario", this.getId(), "Dia", this.getDia(), "Hora Inicio", this.getHoraInicio(),
+                "Hora Fin", this.getHoraFin(), "ID Tutor", this.getTutor().getNombre());
     }
 }

@@ -9,24 +9,27 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Tutoria {
+    private static int contador = 1;
     private int id;
     private String fecha;
     private String hora;
     private String estado;
-    private int idTutor;
-    private int idEstudiante;
-    private int idMateria;
+    private Tutor tutor;
+    private Estudiante estudiante;
+    private Materia materia;
 
-    public Tutoria() {}
+    public Tutoria() {
+        this.id = contador++;
+    }
 
-    public Tutoria(int id, String fecha, String hora, String estado, int idTutor, int idEstudiante, int idMateria) {
-        this.id = id;
+    public Tutoria(String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia) {
+        this.id = contador++;
         this.fecha = fecha;
         this.hora = hora;
         this.estado = estado;
-        this.idTutor = idTutor;
-        this.idEstudiante = idEstudiante;
-        this.idMateria = idMateria;
+        this.tutor = tutor;
+        this.estudiante = estudiante;
+        this.materia = materia;
     }
 
     public int getId() {
@@ -61,27 +64,34 @@ public class Tutoria {
         this.estado = estado;
     }
 
-    public int getIdTutor() {
-        return idTutor;
+    public Tutor getTutor() {
+        return tutor;
     }
 
-    public void setIdTutor(int idTutor) {
-        this.idTutor = idTutor;
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
     }
 
-    public int getIdEstudiante() {
-        return idEstudiante;
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
-    public void setIdEstudiante(int idEstudiante) {
-        this.idEstudiante = idEstudiante;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
-    public int getIdMateria() {
-        return idMateria;
+    public Materia getMateria() {
+        return materia;
     }
 
-    public void setIdMateria(int idMateria) {
-        this.idMateria = idMateria;
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\n%-12s -->  %d \n%-12s -->  %s \n%-12s -->  %s \n%-12s -->  %s \n%-12s -->  %s \n%-12s -->  %s \n%-12s -->  %s \n",
+                "Tutoria", this.getId(), "Fecha", this.getFecha(), "Hora", this.getHora(), "Estado", this.getEstado(),
+                "Tutor", this.getTutor().getNombre(), "Estudiante", this.getEstudiante().getNombre(), "Materia", this.getMateria().getNombre());
     }
 }

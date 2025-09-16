@@ -9,16 +9,19 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Estudiante {
+    private static int contador = 1;
     private int id;
     private String nombre;
     private String gradoEscolar;
     private String telefono;
     private String escuelaProcedencia;
 
-    public Estudiante() {}
+    public Estudiante() {
+        this.id = contador++;
+    }
 
-    public Estudiante(int id, String nombre, String gradoEscolar, String telefono, String escuelaProcedencia) {
-        this.id = id;
+    public Estudiante(String nombre, String gradoEscolar, String telefono, String escuelaProcedencia) {
+        this.id = contador++;
         this.nombre = nombre;
         this.gradoEscolar = gradoEscolar;
         this.telefono = telefono;
@@ -63,5 +66,12 @@ public class Estudiante {
 
     public void setEscuelaProcedencia(String escuelaProcedencia) {
         this.escuelaProcedencia = escuelaProcedencia;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\n%-20s -->  %d \n%-20s -->  %s \n%-20s -->  %s \n%-20s -->  %s \n%-20s -->  %s \n",
+                "Estudiante", this.getId(), "Nombre", this.getNombre(), "Grado Escolar", this.getGradoEscolar(),
+                "Telefono", this.getTelefono(), "Escuela Procedencia", this.getEscuelaProcedencia());
     }
 }

@@ -6,11 +6,12 @@ package main;
 
 /**
  *
- * @author mdjes
+ * @author Cortez, Manuel;
  */
 public class CommunityTutoringApp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
     }
+
 }
