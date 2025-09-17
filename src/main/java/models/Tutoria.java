@@ -9,7 +9,6 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Tutoria {
-    private static int contador = 1;
     private int id;
     private String fecha;
     private String hora;
@@ -31,7 +30,6 @@ public class Tutoria {
     }
 
     public Tutoria(String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia) {
-        this.id = contador++;
         this.fecha = fecha;
         this.hora = hora;
         this.estado = estado;

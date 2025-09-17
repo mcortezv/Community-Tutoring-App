@@ -7,10 +7,7 @@ import config.ConnectionDB;
 import interfaces.IHorarioDAO;
 import models.Horario;
 import models.Tutor;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +19,13 @@ public class HorarioDAO implements IHorarioDAO {
 
     @Override
     public boolean create(Horario horario) {
-        String insert = "INSERT INTO Horario(idHorario, dia, horaInicio, horaFin, idTutor) VALUES(?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO Horario(dia, horaInicio, horaFin, idTutor) VALUES(?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)){
-            ps.setInt(1, horario.getId());
-            ps.setString(2, horario.getDia());
-            ps.setString(3, horario.getHoraInicio());
-            ps.setString(4, horario.getHoraFin());
-            ps.setInt(5, horario.getTutor().getId());
+            ps.setString(1, horario.getDia());
+            ps.setString(2, horario.getHoraInicio());
+            ps.setString(3, horario.getHoraFin());
+            ps.setInt(4, horario.getTutor().getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex){

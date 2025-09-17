@@ -6,10 +6,7 @@ package DAO;
 import config.ConnectionDB;
 import interfaces.ITutorDAO;
 import models.Tutor;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +18,13 @@ public class TutorDAO implements ITutorDAO {
 
     @Override
     public boolean create(Tutor tutor) {
-        String insert = "INSERT INTO Tutor(idTutor, nombreTutor, telefonoTutor, correo, especialidad) VALUES(?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO Tutor(nombreTutor, telefonoTutor, correo, especialidad) VALUES(?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)) {
-            ps.setInt(1, tutor.getId());
-            ps.setString(2, tutor.getNombre());
-            ps.setString(3, tutor.getTelefono());
-            ps.setString(4, tutor.getCorreo());
-            ps.setString(5, tutor.getEspecialidad());
+            ps.setString(1, tutor.getNombre());
+            ps.setString(2, tutor.getTelefono());
+            ps.setString(3, tutor.getCorreo());
+            ps.setString(4, tutor.getEspecialidad());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

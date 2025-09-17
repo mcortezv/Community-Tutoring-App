@@ -9,7 +9,6 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Tutor {
-    private static int contador = 1;
     private int id;
     private String nombre;
     private String telefono;
@@ -27,7 +26,6 @@ public class Tutor {
     }
 
     public Tutor(String nombre, String telefono, String correo, String especialidad) {
-        this.id = contador++;
         this.nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;

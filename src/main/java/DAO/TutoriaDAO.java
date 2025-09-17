@@ -5,14 +5,8 @@
 package DAO;
 import config.ConnectionDB;
 import interfaces.ITutoriaDAO;
-import models.Estudiante;
-import models.Materia;
-import models.Tutor;
-import models.Tutoria;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import models.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +18,15 @@ public class TutoriaDAO implements ITutoriaDAO {
 
     @Override
     public boolean create(Tutoria tutoria) {
-        String insert = "INSERT INTO Tutoria(idTutoria, fecha, hora, estado, idTutor, idEstudiante, idMateria) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO Tutoria(fecha, hora, estado, idTutor, idEstudiante, idMateria) VALUES(?, ?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)) {
-            ps.setInt(1, tutoria.getId());
-            ps.setString(2, tutoria.getFecha());
-            ps.setString(3, tutoria.getHora());
-            ps.setString(4, tutoria.getEstado());
-            ps.setInt(5, tutoria.getTutor().getId());
-            ps.setInt(6, tutoria.getEstudiante().getId());
-            ps.setInt(7, tutoria.getMateria().getId());
+            ps.setString(1, tutoria.getFecha());
+            ps.setString(2, tutoria.getHora());
+            ps.setString(3, tutoria.getEstado());
+            ps.setInt(4, tutoria.getTutor().getId());
+            ps.setInt(5, tutoria.getEstudiante().getId());
+            ps.setInt(6, tutoria.getMateria().getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

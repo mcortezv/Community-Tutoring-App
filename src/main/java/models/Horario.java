@@ -9,7 +9,6 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Horario {
-    private static int contador = 1;
     private int id;
     private String dia;
     private String horaInicio;
@@ -27,7 +26,6 @@ public class Horario {
     }
 
     public Horario(String dia, String horaInicio, String horaFin, Tutor tutor) {
-        this.id = contador++;
         this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;

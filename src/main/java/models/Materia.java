@@ -9,7 +9,6 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Materia {
-    private static int contador = 1;
     private int id;
     private String nombre;
     private String nivel;
@@ -25,7 +24,6 @@ public class Materia {
     }
 
     public Materia(String nombre, String nivel, String descripcion) {
-        this.id = contador++;
         this.nombre = nombre;
         this.nivel = nivel;
         this.descripcion = descripcion;

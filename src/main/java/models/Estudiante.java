@@ -9,7 +9,6 @@ package models;
  * @author Cortez, Manuel;
  */
 public class Estudiante {
-    private static int contador = 1;
     private int id;
     private String nombre;
     private String gradoEscolar;
@@ -29,7 +28,6 @@ public class Estudiante {
     }
 
     public Estudiante(String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia) {
-        this.id = contador++;
         this.nombre = nombre;
         this.gradoEscolar = gradoEscolar;
         this.edad = edad;

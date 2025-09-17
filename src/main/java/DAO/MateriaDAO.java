@@ -6,10 +6,7 @@ package DAO;
 import config.ConnectionDB;
 import interfaces.IMateriaDAO;
 import models.Materia;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +18,12 @@ public class MateriaDAO implements IMateriaDAO {
 
     @Override
     public boolean create(Materia materia) {
-        String insert = "INSERT INTO Materia(idMateria, nombreMateria, nivel, descripcion) VALUES(?, ?, ?, ?)";
+        String insert = "INSERT INTO Materia(nombreMateria, nivel, descripcion) VALUES(?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(insert)) {
-            ps.setInt(1, materia.getId());
-            ps.setString(2, materia.getNombre());
-            ps.setString(3, materia.getNivel());
-            ps.setString(4, materia.getDescripcion());
+            ps.setString(1, materia.getNombre());
+            ps.setString(2, materia.getNivel());
+            ps.setString(3, materia.getDescripcion());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

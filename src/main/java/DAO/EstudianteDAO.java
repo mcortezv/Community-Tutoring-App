@@ -18,15 +18,14 @@ public class EstudianteDAO implements IEstudianteDAO {
 
     @Override
     public boolean create(Estudiante estudiante) {
-        String insert = "INSERT INTO Estudiante(idEstudiante, nombreEstudiante, gradoEscolar, edad, telefonoEstudiante, escuelaProcedencia) VALUES(?, ?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO Estudiante(nombreEstudiante, gradoEscolar, edad, telefonoEstudiante, escuelaProcedencia) VALUES(?, ?, ?, ?, ?)";
         try (Connection connection = ConnectionDB.getConnection();
             PreparedStatement ps = connection.prepareStatement(insert)) {
-            ps.setInt(1, estudiante.getId());
-            ps.setString(2, estudiante.getNombre());
-            ps.setString(3, estudiante.getGradoEscolar());
-            ps.setInt(4, estudiante.getEdad());
-            ps.setString(5, estudiante.getTelefono());
-            ps.setString(6, estudiante.getEscuelaProcedencia());
+            ps.setString(1, estudiante.getNombre());
+            ps.setString(2, estudiante.getGradoEscolar());
+            ps.setInt(3, estudiante.getEdad());
+            ps.setString(4, estudiante.getTelefono());
+            ps.setString(5, estudiante.getEscuelaProcedencia());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
