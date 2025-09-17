@@ -45,7 +45,7 @@ public class TutoriaDAO implements ITutoriaDAO {
     @Override
     public Tutoria read(int idTutoria) {
         String read = "SELECT * FROM Tutoria INNER JOIN Tutor ON Tutoria.idTutor = Tutor.idTutor " +
-                "INNER JOIN ESTUDIANTE ON Tutoria.idEstudiante = Estudiante.idEstudiante " +
+                "INNER JOIN Estudiante ON Tutoria.idEstudiante = Estudiante.idEstudiante " +
                 "INNER JOIN Materia ON Tutoria.idMateria = Materia.idMateria WHERE idTutoria = ?";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(read)) {
@@ -118,8 +118,8 @@ public class TutoriaDAO implements ITutoriaDAO {
     @Override
     public List<Tutoria> readAll() {
         List<Tutoria> lista = new ArrayList<>();
-        String read = "SELECT * FROM Tutoria INNER JOIN Tutor ON Tutoria.idTutor = Tutor.idTutor" +
-                "INNER JOIN Estudiante ON Tutoria.idEstudiante = Estudiante.idEstudiante" +
+        String read = "SELECT * FROM Tutoria INNER JOIN Tutor ON Tutoria.idTutor = Tutor.idTutor " +
+                "INNER JOIN Estudiante ON Tutoria.idEstudiante = Estudiante.idEstudiante " +
                 "INNER JOIN Materia ON Tutoria.idMateria = Materia.idMateria";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement ps = connection.prepareStatement(read)){

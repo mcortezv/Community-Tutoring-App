@@ -52,8 +52,8 @@ public class HorarioDAO implements IHorarioDAO {
                 horario.setHoraInicio(rs.getString("horaInicio"));
                 horario.setHoraFin(rs.getString("horaFin"));
                 horario.setTutor(new Tutor(rs.getInt("idTutor"),
-                        rs.getString("nombre"),
-                        rs.getString("telefono"),
+                        rs.getString("nombreTutor"),
+                        rs.getString("telefonoTutor"),
                         rs.getString("correo"),
                         rs.getString("especialidad")));
                 return horario;
@@ -110,8 +110,8 @@ public class HorarioDAO implements IHorarioDAO {
                 horario.setHoraInicio(rs.getString("horaInicio"));
                 horario.setHoraFin(rs.getString("horaFin"));
                 horario.setTutor(new Tutor(rs.getInt("idTutor"),
-                        rs.getString("nombre"),
-                        rs.getString("telefono"),
+                        rs.getString("nombreTutor"),
+                        rs.getString("telefonoTutor"),
                         rs.getString("correo"),
                         rs.getString("especialidad")));
                 lista.add(horario);
