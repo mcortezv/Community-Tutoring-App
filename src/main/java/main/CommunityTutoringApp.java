@@ -26,7 +26,8 @@ public class CommunityTutoringApp {
         tutoriaController = new TutoriaController();
 
         System.out.println("\n---------- Pruebas ---------- \n");
-
+        
+        System.out.println("Prueba");
         // ESTUDIANTES -------------------------------------------------------------------------------------------------
         System.out.println("--- ESTUDIANTES ---");
         estudianteController.createEstudiante("Manuel Cortez", "Secundaria", 15, "5512345678", "Escuela Uno");
