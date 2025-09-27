@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.formsDialog;
-import controllers.TutoriaController;
+import controllers.MainController;
 import models.Tutoria;
 import view.MainFrame;
 import view.styles.Button;
@@ -27,9 +27,9 @@ public final class TutoriaFormDialog extends Dialog {
     private TextField idTutorField;
     private TextField idEstudianteField;
     private TextField idMateriaField;
-    private TutoriaController controller;
+    private MainController controller;
 
-    public TutoriaFormDialog(MainFrame owner, TutoriaController controller, int option) {
+    public TutoriaFormDialog(MainFrame owner, MainController controller, int option) {
         super(owner, " ", true);
         setResizable(false);
         mainFrame = owner;
@@ -105,12 +105,12 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!controller.create(fechaField.getText().trim(),
+            if (!controller.getTutoriaController().create(fechaField.getText().trim(),
                     horaField.getText().trim(),
                     estadoField.getText().trim(),
-                    idTutorField.getText().trim(),
-                    idEstudianteField.getText().trim(),
-                    idMateriaField.getText().trim())) {
+                    controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
+                    controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
+                    controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutoria agregada con exito");
             }
             dispose();
@@ -143,7 +143,7 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnSearch = new Button("Buscar");
         btnSearch.addActionListener(e -> {
-            Tutoria tutoria = controller.read(Integer.parseInt(idField.getText().trim()));
+            Tutoria tutoria = controller.getTutoriaController().read(Integer.parseInt(idField.getText().trim()));
             if (tutoria != null) {
                 JOptionPane.showMessageDialog(centerPanel, tutoria.toString());
             }
@@ -206,13 +206,13 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (!controller.update(Integer.parseInt(idField.getText().trim()),
+            if (!controller.getTutoriaController().update(Integer.parseInt(idField.getText().trim()),
                     fechaField.getText().trim(),
                     horaField.getText().trim(),
                     estadoField.getText().trim(),
-                    idTutorField.getText().trim(),
-                    idEstudianteField.getText().trim(),
-                    idMateriaField.getText().trim())) {
+                    controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
+                    controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
+                    controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutoria actualizada con exito");
             }
             dispose();
@@ -246,7 +246,7 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
+            if (!controller.getTutoriaController().delete(Integer.parseInt(idField.getText().trim()))) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutoria eliminada con exito");
             }
             dispose();
@@ -259,6 +259,6 @@ public final class TutoriaFormDialog extends Dialog {
     }
 
     public void readAllTutorias() {
-        controller.readAll();
+        controller.getTutoriaController().readAll();
     }
 }

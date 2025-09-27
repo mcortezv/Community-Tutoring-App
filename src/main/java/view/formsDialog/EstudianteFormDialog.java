@@ -4,6 +4,7 @@
  */
 package view.formsDialog;
 import controllers.EstudianteController;
+import controllers.MainController;
 import models.Estudiante;
 import view.MainFrame;
 import view.styles.Button;
@@ -28,13 +29,13 @@ public final class EstudianteFormDialog extends Dialog {
     private TextField escuelaField;
     private EstudianteController controller;
 
-    public EstudianteFormDialog(MainFrame owner, EstudianteController controller, int option) {
+    public EstudianteFormDialog(MainFrame owner, MainController controller, int option) {
         super(owner, " ", true);
         setResizable(false);
         mainFrame = owner;
         centerPanel = new JPanel();
         southPanel = new JPanel();
-        this.controller = controller;
+        this.controller = controller.getEstudianteController();
         switch (option) {
             case 0 -> {
                 setTitle("Agregar Estudiante");

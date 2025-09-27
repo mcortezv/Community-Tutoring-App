@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
+import controllers.MainController;
 import view.MainFrame;
 
 /**
@@ -16,7 +17,11 @@ public class Main {
      * Metodo main que ejecutará la lógica contenida en el sistema.
      */
     public static void main(String[] args) {
-        MainFrame mainMenu = new MainFrame();
+        MainFrame mainMenu = new MainFrame(createMainController());
         mainMenu.show();
+    }
+
+    public static MainController createMainController(){
+        return new MainController();
     }
 }
