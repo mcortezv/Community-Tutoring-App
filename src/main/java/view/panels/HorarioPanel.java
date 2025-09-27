@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.panels;
-import controllers.HorarioController;
+import controllers.MainController;
 import view.MainFrame;
 import view.formsDialog.HorarioFormDialog;
 import view.styles.Panel;
@@ -20,11 +20,11 @@ public class HorarioPanel extends Panel {
     private Button btnUpdateHorario;
     private Button btnDeleteHorario;
     private Button btnReadAllHorarios;
-    private HorarioController horarioController;
+    private MainController controller;
 
-    public HorarioPanel(MainFrame frame, NorthPanel northPanel, HorarioController horarioController) {
+    public HorarioPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
-        this.horarioController = horarioController;
+        this.controller = controller;
     }
 
     @Override
@@ -42,15 +42,23 @@ public class HorarioPanel extends Panel {
         btnReadAllHorarios.setPreferredSize(new Dimension(230, 40));
 
         btnCreateHorario.addActionListener(e -> {
-            new HorarioFormDialog(mainFrame, horarioController, 0).setVisible(true);
+            new HorarioFormDialog(mainFrame, controller, 0).setVisible(true);
         });
 
         btnReadHorario.addActionListener(e -> {
-            new HorarioFormDialog(mainFrame, horarioController, 1).setVisible(true);
+            new HorarioFormDialog(mainFrame, controller, 1).setVisible(true);
         });
 
         btnUpdateHorario.addActionListener(e -> {
-            new HorarioFormDialog(mainFrame, horarioController, 2).setVisible(true);
+            new HorarioFormDialog(mainFrame, controller, 2).setVisible(true);
+        });
+
+        btnDeleteHorario.addActionListener(e -> {
+            new HorarioFormDialog(mainFrame, controller, 3).setVisible(true);
+        });
+
+        btnReadAllHorarios.addActionListener(e -> {
+            new HorarioFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
         centralPanel.add(btnCreateHorario);

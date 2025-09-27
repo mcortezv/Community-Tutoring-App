@@ -62,7 +62,7 @@ public final class TutoriaFormDialog extends Dialog {
     }
 
     public void createTutoria() {
-        setSize(660, 460);
+        setSize(660, 560);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
@@ -92,7 +92,7 @@ public final class TutoriaFormDialog extends Dialog {
         idTutorPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel idEstudiantePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idTutorPanel.add(new JLabel("ID del Estudiante:                         "));
+        idEstudiantePanel.add(new JLabel("ID del Estudiante:                         "));
         idEstudianteField = new TextField(20);
         idEstudiantePanel.add(idEstudianteField);
         idEstudiantePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
@@ -116,8 +116,8 @@ public final class TutoriaFormDialog extends Dialog {
             dispose();
         });
 
-        centerPanel.add(fechaPanel);
         centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(fechaPanel);
         centerPanel.add(horaPanel);
         centerPanel.add(estadoPanel);
         centerPanel.add(idTutorPanel);
@@ -157,7 +157,7 @@ public final class TutoriaFormDialog extends Dialog {
     }
 
     public void updateTutoria() {
-        setSize(660, 460);
+        setSize(660, 600);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
@@ -193,7 +193,7 @@ public final class TutoriaFormDialog extends Dialog {
         idTutorPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel idEstudiantePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idTutorPanel.add(new JLabel("ID del Estudiante:                         "));
+        idEstudiantePanel.add(new JLabel("ID del Estudiante:                         "));
         idEstudianteField = new TextField(20);
         idEstudiantePanel.add(idEstudianteField);
         idEstudiantePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));

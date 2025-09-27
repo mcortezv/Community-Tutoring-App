@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.panels;
-import controllers.TutoriaController;
-import view.formsDialog.TutorFormDialog;
+import controllers.MainController;
+import view.formsDialog.TutoriaFormDialog;
 import view.MainFrame;
 import view.styles.Panel;
 import view.styles.Button;
@@ -20,11 +20,11 @@ public class TutoriaPanel extends Panel {
     private Button btnUpdateTutoria;
     private Button btnDeleteTutoria;
     private Button btnReadAllTutorias;
-    private TutoriaController tutoriaController;
+    private MainController controller;
 
-    public TutoriaPanel(MainFrame frame, NorthPanel northPanel, TutoriaController tutoriaController) {
+    public TutoriaPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
-        this.tutoriaController = tutoriaController;
+        this.controller = controller;
     }
 
     @Override
@@ -45,20 +45,23 @@ public class TutoriaPanel extends Panel {
 
 
         btnCreateTutoria.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutoriaController, 0).setVisible(true);
+            new TutoriaFormDialog(mainFrame, controller, 0).setVisible(true);
         });
 
         btnReadTutoria.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutoriaController, 1).setVisible(true);
+            new TutoriaFormDialog(mainFrame, controller, 1).setVisible(true);
         });
 
         btnUpdateTutoria.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutoriaController, 2);
-
+            new TutoriaFormDialog(mainFrame, controller, 2).setVisible(true);
         });
 
         btnDeleteTutoria.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutoriaController, 3).setVisible(true);
+            new TutoriaFormDialog(mainFrame, controller, 3).setVisible(true);
+        });
+
+        btnReadAllTutorias.addActionListener(e -> {
+            new TutoriaFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
         centralPanel.add(btnCreateTutoria);

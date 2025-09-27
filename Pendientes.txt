@@ -1,0 +1,7 @@
+Pruebas Unitarias
+Revisar y Mejorar los toString() de los Modelos
+Agregar Tabla en Todos los Paneles
+Cambiar los Styles
+Mejorar Validadores
+Pantalla de Inicio
+Ajustar Text Fields
