@@ -30,18 +30,10 @@ public final class MainFrame extends JFrame {
     private HorarioPanel horarioPanel;
     private MateriaPanel materiaPanel;
     private TutoriaPanel tutoriaPanel;
-    private final EstudianteController estudianteController;
-    private final HorarioController horarioController;
-    private final MateriaController materiaController;
-    private final TutorController tutorController;
-    private final TutoriaController tutoriaController;
+    private final MainController mainController;
 
-    public MainFrame() {
-        this.estudianteController = new EstudianteController();
-        this.horarioController = new HorarioController();
-        this.materiaController = new MateriaController();
-        this.tutorController = new TutorController();
-        this.tutoriaController = new TutoriaController();
+    public MainFrame(MainController mainController) {
+        this.mainController = mainController;
         startComponents();
         setTitle("Tutorias Comunitarias");
         setSize(1280, 720);
@@ -69,11 +61,11 @@ public final class MainFrame extends JFrame {
         centralPanel.setBackground(Style.PANEL_COLOR);
         add(centralPanel, BorderLayout.CENTER);
 
-        estudiantePanel = new EstudiantePanel(this, northPanel, estudianteController);
-        tutorPanel = new TutorPanel(this, northPanel, tutorController);
-        horarioPanel = new HorarioPanel(this, northPanel , horarioController);
-        materiaPanel = new MateriaPanel(this, northPanel , materiaController);
-        tutoriaPanel = new TutoriaPanel(this, northPanel, tutoriaController);
+        estudiantePanel = new EstudiantePanel(this, northPanel, mainController);
+        tutorPanel = new TutorPanel(this, northPanel, mainController);
+        horarioPanel = new HorarioPanel(this, northPanel , mainController);
+        materiaPanel = new MateriaPanel(this, northPanel , mainController);
+        tutoriaPanel = new TutoriaPanel(this, northPanel, mainController);
 
         add(northPanel, BorderLayout.NORTH);
         northPanel.add(btnEstudiantes);
