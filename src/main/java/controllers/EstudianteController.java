@@ -20,7 +20,7 @@ public class EstudianteController {
         estudianteDAO = new EstudianteDAO();
     }
 
-    public boolean createEstudiante(String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia) {
+    public boolean create(String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia) {
         if (nombre == null  || gradoEscolar == null || telefono == null || escuelaProcedencia == null) {
             System.out.println("Ningun dato no puede estar vacio");
             return false;
@@ -37,14 +37,14 @@ public class EstudianteController {
         return estudianteDAO.create(estudiante);
     }
 
-    public Estudiante readEstudiante(int idEstudiante){
+    public Estudiante read(int idEstudiante){
         if (idEstudiante <= 0){
             System.out.println("El ID no puede ser negativa");
         }
         return estudianteDAO.read(idEstudiante);
     }
 
-    public boolean updateEstudiante(int idEstudiante, String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia){
+    public boolean update(int idEstudiante, String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia){
         if (nombre == null  || gradoEscolar == null || telefono == null || escuelaProcedencia == null) {
             System.out.println("Ningun dato no puede estar vacio");
             return false;
@@ -69,7 +69,7 @@ public class EstudianteController {
         return estudianteDAO.update(estudiante);
     }
 
-    public boolean deleteEstudiante(int idEstudiante){
+    public boolean delete(int idEstudiante){
         if (idEstudiante <= 0) {
             System.out.println("El ID no puede ser negativa");
             return false;

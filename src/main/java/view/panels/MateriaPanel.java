@@ -42,25 +42,24 @@ public class MateriaPanel extends Panel {
         btnDeleteMateria.setPreferredSize(new Dimension(230, 40));
         btnReadAllMaterias.setPreferredSize(new Dimension(230, 40));
 
-        //button
         btnCreateMateria.addActionListener(e -> {
-            //new MateriaFormDialog(mainFrame, 0, materiaController, this).setVisible(true);
+            new MateriaFormDialog(mainFrame, materiaController, 0).setVisible(true);
         });
 
         btnReadMateria.addActionListener(e -> {
-            //new MateriaFormDialog(mainFrame, 1, materiaController, this).setVisible(true);
+            new MateriaFormDialog(mainFrame, materiaController, 1).setVisible(true);
         });
 
         btnUpdateMateria.addActionListener(e -> {
-            //new MateriaFormDialog(mainFrame, 2, materiaController, this).setVisible(true);
+            new MateriaFormDialog(mainFrame, materiaController, 2).setVisible(true);
         });
 
         btnDeleteMateria.addActionListener(e -> {
-            //new MateriaFormDialog(mainFrame, 3, materiaController, this).setVisible(true);
+            new MateriaFormDialog(mainFrame, materiaController, 3).setVisible(true);
         });
 
         btnReadAllMaterias.addActionListener(e -> {
-            //new MateriaFormDialog(mainFrame, 4, materiaController, this).setVisible(true);
+            new MateriaFormDialog(mainFrame, materiaController, 4).setVisible(true);
         });
 
         centralPanel.add(btnCreateMateria);

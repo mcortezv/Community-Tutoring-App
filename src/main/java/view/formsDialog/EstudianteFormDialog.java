@@ -98,7 +98,7 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!controller.createEstudiante(nombreField.getText().trim(),
+            if (!controller.create(nombreField.getText().trim(),
                     gradoEscolarField.getText().trim(),
                     Integer.parseInt(edadField.getText().trim()),
                     telefonoField.getText().trim(),
@@ -134,7 +134,7 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnSearch = new Button("Buscar");
         btnSearch.addActionListener(e -> {
-            Estudiante estudiante = controller.readEstudiante(Integer.parseInt(idField.getText().trim()));
+            Estudiante estudiante = controller.read(Integer.parseInt(idField.getText().trim()));
             if (estudiante != null) {
                 JOptionPane.showMessageDialog(centerPanel, estudiante.toString());
             }
@@ -191,7 +191,7 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (!controller.updateEstudiante(Integer.parseInt(idField.getText().trim()),
+            if (!controller.update(Integer.parseInt(idField.getText().trim()),
                     nombreField.getText().trim(),
                     gradoEscolarField.getText().trim(),
                     Integer.parseInt(edadField.getText().trim()),
@@ -227,9 +227,9 @@ public final class EstudianteFormDialog extends Dialog {
         idPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         southPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
-        Button btnDelete = new Button("Eliminar Estudiante");
+        Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (!controller.deleteEstudiante(Integer.parseInt(idField.getText().trim()))) {
+            if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
                 JOptionPane.showMessageDialog(centerPanel, "Estudiante eliminado con exito");
             }
             dispose();

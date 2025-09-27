@@ -42,15 +42,15 @@ public class HorarioPanel extends Panel {
         btnReadAllHorarios.setPreferredSize(new Dimension(230, 40));
 
         btnCreateHorario.addActionListener(e -> {
-            //new HorarioFormDialog(mainFrame, 0, horarioController, this).setVisible(true);
+            new HorarioFormDialog(mainFrame, horarioController, 0).setVisible(true);
         });
 
         btnReadHorario.addActionListener(e -> {
-            //new HorarioFormDialog(mainFrame, 1, horarioController, this).setVisible(true);
+            new HorarioFormDialog(mainFrame, horarioController, 1).setVisible(true);
         });
 
         btnUpdateHorario.addActionListener(e -> {
-            //new HorarioFormDialog(mainFrame, 2, horarioController, this).setVisible(true);
+            new HorarioFormDialog(mainFrame, horarioController, 2).setVisible(true);
         });
 
         centralPanel.add(btnCreateHorario);

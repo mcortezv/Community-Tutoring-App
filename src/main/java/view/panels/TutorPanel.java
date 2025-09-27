@@ -35,30 +35,27 @@ public class TutorPanel extends Panel {
         btnDeleteTutor = new Button("Eliminar Tutor");
         btnReadAllTutores = new Button("Listar Tutores");
 
-
-        //Buttons
         btnCreateTutor.setPreferredSize(new Dimension(230, 40));
         btnReadTutor.setPreferredSize(new Dimension(230, 40));
         btnUpdateTutor.setPreferredSize(new Dimension(230, 40));
         btnDeleteTutor.setPreferredSize(new Dimension(230, 40));
         btnReadAllTutores.setPreferredSize(new Dimension(230, 40));
 
-
         btnCreateTutor.addActionListener(e -> {
-            //new TutorFormDialog(mainFrame, 0, tutorController).setVisible(true);
+            new TutorFormDialog(mainFrame, tutorController, 0).setVisible(true);
         });
 
         btnReadTutor.addActionListener(e -> {
-            //new TutorFormDialog(mainFrame, 1, tutorController).setVisible(true);
+            new TutorFormDialog(mainFrame, tutorController, 1).setVisible(true);
         });
 
         btnUpdateTutor.addActionListener(e -> {
-            //new TutorFormDialog(mainFrame, 2, tutorController).setVisible(true);
+            new TutorFormDialog(mainFrame, tutorController, 2).setVisible(true);
 
         });
 
         btnDeleteTutor.addActionListener(e -> {
-            //new TutorFormDialog(mainFrame, 3, tutorController).setVisible(true);
+            new TutorFormDialog(mainFrame, tutorController, 3).setVisible(true);
         });
 
         centralPanel.add(btnCreateTutor);
