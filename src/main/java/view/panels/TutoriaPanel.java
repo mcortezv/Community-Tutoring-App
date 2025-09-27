@@ -45,20 +45,20 @@ public class TutoriaPanel extends Panel {
 
 
         btnCreateTutoria.addActionListener(e -> {
-            //new TutorFormDialog(mainFrame, 0,tutoriaController).setVisible(true);
+            new TutorFormDialog(mainFrame, tutoriaController, 0).setVisible(true);
         });
 
         btnReadTutoria.addActionListener(e -> {
-            //new TutorFormDialog(mainFrame, 1,tutoriaController).setVisible(true);
+            new TutorFormDialog(mainFrame, tutoriaController, 1).setVisible(true);
         });
 
         btnUpdateTutoria.addActionListener(e -> {
-            //new TutorFormDialog(2, tutoriaController);
+            new TutorFormDialog(mainFrame, tutoriaController, 2);
 
         });
 
         btnDeleteTutoria.addActionListener(e -> {
-            //new TutorFormDialog(mainFrame, 3,tutoriaController).setVisible(true);
+            new TutorFormDialog(mainFrame, tutoriaController, 3).setVisible(true);
         });
 
         centralPanel.add(btnCreateTutoria);

@@ -29,19 +29,19 @@ public class CommunityTutoringApp {
 
         // ESTUDIANTES -------------------------------------------------------------------------------------------------
         System.out.println("--- ESTUDIANTES ---");
-        estudianteController.createEstudiante("Manuel Cortez", "Secundaria", 15, "5512345678", "Escuela Uno");
-        estudianteController.createEstudiante("Sebastian Escalante", "Preparatoria", 17, "5598765432", "Escuela Dos");
+        estudianteController.create("Manuel Cortez", "Secundaria", 15, "5512345678", "Escuela Uno");
+        estudianteController.create("Sebastian Escalante", "Preparatoria", 17, "5598765432", "Escuela Dos");
         List<Estudiante> estudiantes = estudianteController.readAllEstudiantes();
         for (Estudiante estudiante : estudiantes){
             System.out.println(estudiante);
         }
 
         System.out.println("\nActualizar estudiante con ID = 1");
-        estudianteController.updateEstudiante(1, "Manuel Cortez Modificado", "Secundaria", 16, "5512345678", "Escuela Uno");
-        System.out.println(estudianteController.readEstudiante(1));
+        estudianteController.update(1, "Manuel Cortez Modificado", "Secundaria", 16, "5512345678", "Escuela Uno");
+        System.out.println(estudianteController.read(1));
 
         System.out.println("\nEliminar estudiante con ID = 2");
-        estudianteController.deleteEstudiante(2);
+        estudianteController.delete(2);
         estudiantes = estudianteController.readAllEstudiantes();
         for (Estudiante estudiante : estudiantes){
             System.out.println(estudiante);
@@ -110,7 +110,7 @@ public class CommunityTutoringApp {
 
         // TUTORIAS ----------------------------------------------------------------------------------------------------
         System.out.println("\n--- TUTORIAS ---");
-        Estudiante est = estudianteController.readEstudiante(1);
+        Estudiante est = estudianteController.read(1);
         Materia mat = materiaController.read(1);
         tutoriaController.create("2025-09-20", "09:30", "Programada", tutor, est, mat);
         tutoriaController.create("2025-09-21", "11:00", "Programada", tutor, est, mat);
