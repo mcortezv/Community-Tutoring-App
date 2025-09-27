@@ -41,19 +41,19 @@ public class EstudiantePanel extends Panel {
         btnDeleteEstudiante.setPreferredSize(new Dimension(230, 40));
         btnReadAllEstudiantes.setPreferredSize(new Dimension(230, 40));
         btnCreateEstudiante.addActionListener(e -> {
-            //new StudentFormDialog(mainFrame, estudianteController, 0).setVisible(true);
+            new EstudianteFormDialog(mainFrame, estudianteController, 0).setVisible(true);
         });
         btnReadEstudiante.addActionListener(e -> {
-            //new StudentFormDialog(mainFrame, estudianteController, 1).setVisible(true);
+            new EstudianteFormDialog(mainFrame, estudianteController, 1).setVisible(true);
         });
         btnUpdateEstudiante.addActionListener(e -> {
-            //new StudentFormDialog(mainFrame, estudianteController, 2).setVisible(true);
+            new EstudianteFormDialog(mainFrame, estudianteController, 2).setVisible(true);
         });
         btnDeleteEstudiante.addActionListener(e -> {
-            //new StudentFormDialog(mainFrame, estudianteController, 3).setVisible(true);
+            new EstudianteFormDialog(mainFrame, estudianteController, 3).setVisible(true);
         });
         btnReadAllEstudiantes.addActionListener(e -> {
-            //new StudentFormDialog(mainFrame, estudianteController, 4).setVisible(true);
+            new EstudianteFormDialog(mainFrame, estudianteController, 4).setVisible(true);
         });
 
         centralPanel.add(btnCreateEstudiante);
