@@ -3,11 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.styles;
+import javax.swing.*;
 
 /**
  *
- * @author mdjes
+ * @author Cortez, Manuel;
  */
-public class Label {
-    
+public class Label extends JLabel {
+
+    public Label(String texto) {
+        super(texto);
+        setFont(Style.LABEL_FONT);
+        setForeground(Style.TEXT_COLOR);
+    }
 }
