@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.panels;
-import controllers.MateriaController;
+import controllers.MainController;
 import view.MainFrame;
 import view.formsDialog.MateriaFormDialog;
 import view.styles.Panel;
@@ -20,11 +20,11 @@ public class MateriaPanel extends Panel {
     private Button btnUpdateMateria;
     private Button btnDeleteMateria;
     private Button btnReadAllMaterias;
-    private MateriaController materiaController;
+    private MainController controller;
 
-    public MateriaPanel(MainFrame frame, NorthPanel northPanel, MateriaController materiaController) {
+    public MateriaPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
-        this.materiaController = materiaController;
+        this.controller = controller;
     }
 
     @Override
@@ -43,23 +43,23 @@ public class MateriaPanel extends Panel {
         btnReadAllMaterias.setPreferredSize(new Dimension(230, 40));
 
         btnCreateMateria.addActionListener(e -> {
-            new MateriaFormDialog(mainFrame, materiaController, 0).setVisible(true);
+            new MateriaFormDialog(mainFrame, controller, 0).setVisible(true);
         });
 
         btnReadMateria.addActionListener(e -> {
-            new MateriaFormDialog(mainFrame, materiaController, 1).setVisible(true);
+            new MateriaFormDialog(mainFrame, controller, 1).setVisible(true);
         });
 
         btnUpdateMateria.addActionListener(e -> {
-            new MateriaFormDialog(mainFrame, materiaController, 2).setVisible(true);
+            new MateriaFormDialog(mainFrame, controller, 2).setVisible(true);
         });
 
         btnDeleteMateria.addActionListener(e -> {
-            new MateriaFormDialog(mainFrame, materiaController, 3).setVisible(true);
+            new MateriaFormDialog(mainFrame, controller, 3).setVisible(true);
         });
 
         btnReadAllMaterias.addActionListener(e -> {
-            new MateriaFormDialog(mainFrame, materiaController, 4).setVisible(true);
+            new MateriaFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
         centralPanel.add(btnCreateMateria);

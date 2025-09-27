@@ -62,7 +62,7 @@ public final class EstudianteFormDialog extends Dialog {
     }
 
     public void createEstudiante() {
-        setSize(660, 460);
+        setSize(660, 480);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
@@ -149,7 +149,7 @@ public final class EstudianteFormDialog extends Dialog {
     }
 
     public void updateEstudiante() {
-        setSize(660, 460);
+        setSize(660, 520);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));

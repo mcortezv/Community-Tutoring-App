@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.formsDialog;
+import controllers.MainController;
 import controllers.MateriaController;
 import models.Materia;
 import view.MainFrame;
@@ -26,13 +27,13 @@ public final class MateriaFormDialog extends Dialog {
     private TextField descripcionField;
     private MateriaController controller;
 
-    public MateriaFormDialog(MainFrame owner, MateriaController controller, int option) {
+    public MateriaFormDialog(MainFrame owner, MainController controller, int option) {
         super(owner, " ", true);
         setResizable(false);
         mainFrame = owner;
         centerPanel = new JPanel();
         southPanel = new JPanel();
-        this.controller = controller;
+        this.controller = controller.getMateriaController();
         switch (option) {
             case 0 -> {
                 setTitle("Agregar Materia");
@@ -59,7 +60,7 @@ public final class MateriaFormDialog extends Dialog {
     }
 
     public void createMateria() {
-        setSize(660, 460);
+        setSize(660, 400);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));

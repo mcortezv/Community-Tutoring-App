@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.formsDialog;
+import controllers.MainController;
 import controllers.TutorController;
 import models.Tutor;
 import view.MainFrame;
@@ -27,13 +28,13 @@ public final class TutorFormDialog extends Dialog {
     private TextField especialidadField;
     private TutorController controller;
 
-    public TutorFormDialog(MainFrame owner, TutorController controller, int option) {
+    public TutorFormDialog(MainFrame owner, MainController controller, int option) {
         super(owner, " ", true);
         setResizable(false);
         mainFrame = owner;
         centerPanel = new JPanel();
         southPanel = new JPanel();
-        this.controller = controller;
+        this.controller = controller.getTutorController();
         switch (option) {
             case 0 -> {
                 setTitle("Agregar Tutor");

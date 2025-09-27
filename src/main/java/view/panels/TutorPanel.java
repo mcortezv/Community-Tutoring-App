@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.panels;
-import controllers.TutorController;
+import controllers.MainController;
 import view.formsDialog.TutorFormDialog;
 import view.MainFrame;
 import view.styles.Panel;
@@ -20,11 +20,11 @@ public class TutorPanel extends Panel {
     private Button btnUpdateTutor;
     private Button btnDeleteTutor;
     private Button btnReadAllTutores;
-    private TutorController tutorController;
+    private MainController controller;
 
-    public TutorPanel(MainFrame frame, NorthPanel northPanel, TutorController tutorController) {
+    public TutorPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
-        this.tutorController = tutorController;
+        this.controller = controller;
     }
 
     @Override
@@ -42,20 +42,24 @@ public class TutorPanel extends Panel {
         btnReadAllTutores.setPreferredSize(new Dimension(230, 40));
 
         btnCreateTutor.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutorController, 0).setVisible(true);
+            new TutorFormDialog(mainFrame, controller, 0).setVisible(true);
         });
 
         btnReadTutor.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutorController, 1).setVisible(true);
+            new TutorFormDialog(mainFrame, controller, 1).setVisible(true);
         });
 
         btnUpdateTutor.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutorController, 2).setVisible(true);
+            new TutorFormDialog(mainFrame, controller, 2).setVisible(true);
 
         });
 
         btnDeleteTutor.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, tutorController, 3).setVisible(true);
+            new TutorFormDialog(mainFrame, controller, 3).setVisible(true);
+        });
+
+        btnReadAllTutores.addActionListener(e -> {
+            new TutorFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
         centralPanel.add(btnCreateTutor);

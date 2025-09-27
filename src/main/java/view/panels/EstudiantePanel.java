@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.panels;
-import controllers.EstudianteController;
+import controllers.MainController;
 import view.formsDialog.EstudianteFormDialog;
 import view.MainFrame;
 import view.styles.Panel;
@@ -20,11 +20,11 @@ public class EstudiantePanel extends Panel {
     private Button btnUpdateEstudiante;
     private Button btnDeleteEstudiante;
     private Button btnReadAllEstudiantes;
-    private EstudianteController estudianteController;
+    private MainController controller;
 
-    public EstudiantePanel(MainFrame frame, NorthPanel northPanel, EstudianteController estudianteController) {
+    public EstudiantePanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
-        this.estudianteController = estudianteController;
+        this.controller = controller;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class EstudiantePanel extends Panel {
         btnDeleteEstudiante.setPreferredSize(new Dimension(230, 40));
         btnReadAllEstudiantes.setPreferredSize(new Dimension(230, 40));
         btnCreateEstudiante.addActionListener(e -> {
-            new EstudianteFormDialog(mainFrame, estudianteController, 0).setVisible(true);
+            new EstudianteFormDialog(mainFrame, controller, 0).setVisible(true);
         });
         btnReadEstudiante.addActionListener(e -> {
-            new EstudianteFormDialog(mainFrame, estudianteController, 1).setVisible(true);
+            new EstudianteFormDialog(mainFrame, controller, 1).setVisible(true);
         });
         btnUpdateEstudiante.addActionListener(e -> {
-            new EstudianteFormDialog(mainFrame, estudianteController, 2).setVisible(true);
+            new EstudianteFormDialog(mainFrame, controller, 2).setVisible(true);
         });
         btnDeleteEstudiante.addActionListener(e -> {
-            new EstudianteFormDialog(mainFrame, estudianteController, 3).setVisible(true);
+            new EstudianteFormDialog(mainFrame, controller, 3).setVisible(true);
         });
         btnReadAllEstudiantes.addActionListener(e -> {
-            new EstudianteFormDialog(mainFrame, estudianteController, 4).setVisible(true);
+            new EstudianteFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
         centralPanel.add(btnCreateEstudiante);
