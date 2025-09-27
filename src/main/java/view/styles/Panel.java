@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view.styles;
-import interfaces.IController;
 import view.MainFrame;
 import view.panels.NorthPanel;
 import java.awt.*;
@@ -21,7 +20,7 @@ public abstract class Panel extends JPanel {
     protected Button btnBack;
     protected NorthPanel northPanel;
 
-    public Panel(MainFrame frame, NorthPanel northPanel, IController controller) {
+    public Panel(MainFrame frame, NorthPanel northPanel) {
         setBackground(Style.BACKGROUND_COLOR);
         mainFrame = frame;
         this.northPanel = northPanel;

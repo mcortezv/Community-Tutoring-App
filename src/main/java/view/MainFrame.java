@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view;
-import interfaces.IController;
+import controllers.*;
 import view.styles.Button;
 import view.styles.Style;
 import java.awt.*;
@@ -30,10 +30,18 @@ public final class MainFrame extends JFrame {
     private HorarioPanel horarioPanel;
     private MateriaPanel materiaPanel;
     private TutoriaPanel tutoriaPanel;
-    private final IController controller;
+    private final EstudianteController estudianteController;
+    private final HorarioController horarioController;
+    private final MateriaController materiaController;
+    private final TutorController tutorController;
+    private final TutoriaController tutoriaController;
 
-    public MainFrame(IController controller) {
-        this.controller = controller;
+    public MainFrame() {
+        this.estudianteController = new EstudianteController();
+        this.horarioController = new HorarioController();
+        this.materiaController = new MateriaController();
+        this.tutorController = new TutorController();
+        this.tutoriaController = new TutoriaController();
         startComponents();
         setTitle("Tutorias Comunitarias");
         setSize(1280, 720);
@@ -44,10 +52,6 @@ public final class MainFrame extends JFrame {
         setResizable(false);
     }
 
-    public IController getController(){
-        return controller;
-    }
-
     public void startComponents() {
         menuBar = new JMenuBar();
         btnEstudiantes = new Button("Estudiantes");
@@ -56,7 +60,7 @@ public final class MainFrame extends JFrame {
         btnMaterias = new Button("Materias");
         btnTutorias = new Button("Tutorias");
 
-        mainPanel = new MainPanel(controller);
+        mainPanel = new MainPanel();
 
         northPanel = new NorthPanel();
 
@@ -65,12 +69,11 @@ public final class MainFrame extends JFrame {
         centralPanel.setBackground(Style.PANEL_COLOR);
         add(centralPanel, BorderLayout.CENTER);
 
-        estudiantePanel = new EstudiantePanel(this, northPanel, controller);
-        TutorPanel tutorPanel = new TutorPanel(this, northPanel, controller);
-        horarioPanel = new HorarioPanel(this, northPanel , controller);
-        materiaPanel = new MateriaPanel(this, northPanel , controller);
-        tutoriaPanel = new TutoriaPanel(this, northPanel, controller);
-        tutoriaPanel.startComponents();
+        estudiantePanel = new EstudiantePanel(this, northPanel, estudianteController);
+        tutorPanel = new TutorPanel(this, northPanel, tutorController);
+        horarioPanel = new HorarioPanel(this, northPanel , horarioController);
+        materiaPanel = new MateriaPanel(this, northPanel , materiaController);
+        tutoriaPanel = new TutoriaPanel(this, northPanel, tutoriaController);
 
         add(northPanel, BorderLayout.NORTH);
         northPanel.add(btnEstudiantes);
