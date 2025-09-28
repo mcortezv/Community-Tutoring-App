@@ -1,7 +1,6 @@
 Pruebas Unitarias
-Revisar y Mejorar los toString() de los Modelos
-Agregar Tabla en Todos los Paneles
-Cambiar los Styles
+Hacer las tablas no editables
 Mejorar Validadores
-Pantalla de Inicio
 Ajustar Text Fields
+Eliminar un objeto cuando otro se elimina
+Actualizar tabla de entidades on delete cascade

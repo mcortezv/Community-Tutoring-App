@@ -67,6 +67,7 @@ CREATE TABLE Horario (
     horaFin TIME,
     idTutor INT,
     FOREIGN KEY (idTutor) REFERENCES Tutor(idTutor)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Materia (
@@ -87,6 +88,7 @@ CREATE TABLE Tutoria (
     FOREIGN KEY (idTutor) REFERENCES Tutor(idTutor),
     FOREIGN KEY (idEstudiante) REFERENCES Estudiante(idEstudiante),
     FOREIGN KEY (idMateria) REFERENCES Materia(idMateria)
+    ON DELETE CASCADE
 );
 ```
 
