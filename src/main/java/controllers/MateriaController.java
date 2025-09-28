@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controllers;
-
 import DAO.MateriaDAO;
 import interfaces.IMateriaDAO;
 import models.Materia;
@@ -37,27 +36,17 @@ public class MateriaController {
             System.out.println("Ningún campo puede estar vacío.");
             return false;
         }
-
         // Valida que el nivel pertenezca a la lista de niveles permitidos (insensible a mayúsculas).
         if (NIVELES_PERMITIDOS.stream().noneMatch(n -> n.equalsIgnoreCase(nivel))) {
             System.out.println("El nivel educativo no es válido. Opciones: Primaria, Secundaria, Preparatoria, Universidad.");
             return false;
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida una longitud razonable para el nombre de la materia.
         if (nombre.trim().length() < 3 || nombre.trim().length() > 50) {
             System.out.println("El nombre de la materia debe tener entre 3 y 50 caracteres.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida una longitud máxima para la descripción.
         if (descripcion.trim().length() > 255) {
             System.out.println("La descripción no puede exceder los 255 caracteres.");
@@ -105,21 +94,11 @@ public class MateriaController {
             System.out.println("El nivel educativo no es válido. Opciones: Primaria, Secundaria, Preparatoria, Universidad.");
             return false;
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
-        // Valida la longitud del nombre.
         if (nombre.trim().length() < 3 || nombre.trim().length() > 50) {
             System.out.println("El nombre de la materia debe tener entre 3 y 50 caracteres.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida la longitud de la descripción.
         if (descripcion.trim().length() > 255) {
             System.out.println("La descripción no puede exceder los 255 caracteres.");
