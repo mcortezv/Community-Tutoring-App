@@ -3,11 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controllers;
-
 import DAO.HorarioDAO;
 import interfaces.IHorarioDAO;
 import models.Horario;
 import models.Tutor;
+import javax.swing.*;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
@@ -29,36 +29,36 @@ public class HorarioController {
     public boolean create(String dia, String horaInicio, String horaFin, Tutor tutor) {
         // Valida que los objetos no sean nulos
         if (dia == null || horaInicio == null || horaFin == null || tutor == null) {
-            System.out.println("Ningún dato puede ser nulo.");
+            JOptionPane.showMessageDialog(null, "Ningún dato puede ser nulo.");
             return false;
         }
 
         // Valida que las cadenas no estén vacías
         if (dia.trim().isEmpty() || horaInicio.trim().isEmpty() || horaFin.trim().isEmpty()) {
-            System.out.println("Los campos de día y hora no pueden estar vacíos.");
+            JOptionPane.showMessageDialog(null, "Los campos de día y hora no pueden estar vacíos.");
             return false;
         }
 
         if (DIAS_SEMANA.stream().noneMatch(d -> d.equalsIgnoreCase(dia))) {
-            System.out.println("El día no corresponde a ningún día de la semana o no cumple el formato (Lunes, Martes, etc).");
+            JOptionPane.showMessageDialog(null, "El día no corresponde a ningún día de la semana o no cumple el formato (Lunes, Martes, etc).");
             return false;
         }
 
         String formatoHora = "^([01]\\d|2[0-3]):[0-5]\\d$";
         if (!Pattern.matches(formatoHora, horaInicio) || !Pattern.matches(formatoHora, horaFin)) {
-            System.out.println("La hora de inicio o fin no cumple con el formato de 24 horas (HH:mm).");
+            JOptionPane.showMessageDialog(null, "La hora de inicio o fin no cumple con el formato de 24 horas (HH:mm).");
             return false;
         }
 
         // Valida que la hora de inicio sea antes que la hora de fin
         if (LocalTime.parse(horaInicio).isAfter(LocalTime.parse(horaFin))) {
-            System.out.println("La hora de inicio no puede ser posterior a la hora de fin.");
+            JOptionPane.showMessageDialog(null, "La hora de inicio no puede ser posterior a la hora de fin.");
             return false;
         }
 
         // Valida que la hora de inicio y fin no sean la misma
         if (horaInicio.equals(horaFin)) {
-            System.out.println("La hora de inicio y la hora de fin no pueden ser iguales.");
+            JOptionPane.showMessageDialog(null, "La hora de inicio y la hora de fin no pueden ser iguales.");
             return false;
         }
 
@@ -68,7 +68,7 @@ public class HorarioController {
 
     public Horario read(int idHorario) {
         if (idHorario <= 0) {
-            System.out.println("El ID del horario no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID del horario no puede ser negativo o cero.");
             return null; // Devuelve null si el ID es inválido
         }
         return horarioDAO.read(idHorario);
@@ -77,36 +77,36 @@ public class HorarioController {
     public boolean update(int idHorario, String dia, String horaInicio, String horaFin, Tutor tutor) {
         // Valida el ID primero
         if (idHorario <= 0) {
-            System.out.println("El ID del horario no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID del horario no puede ser negativo o cero.");
             return false;
         }
 
         // Valida que los objetos no sean nulos
         if (dia == null || horaInicio == null || horaFin == null || tutor == null) {
-            System.out.println("Ningún dato puede ser nulo.");
+            JOptionPane.showMessageDialog(null, "Ningún dato puede ser nulo.");
             return false;
         }
 
         // Valida que las cadenas no estén vacías
         if (dia.trim().isEmpty() || horaInicio.trim().isEmpty() || horaFin.trim().isEmpty()) {
-            System.out.println("Los campos de día y hora no pueden estar vacíos.");
+            JOptionPane.showMessageDialog(null, "Los campos de día y hora no pueden estar vacíos.");
             return false;
         }
 
         if (horarioDAO.read(idHorario) == null) {
-            System.out.println("El horario que intenta actualizar no existe.");
+            JOptionPane.showMessageDialog(null, "El horario que intenta actualizar no existe.");
             return false;
         }
 
         String formatoHora = "^([01]\\d|2[0-3]):[0-5]\\d$";
         if (!Pattern.matches(formatoHora, horaInicio) || !Pattern.matches(formatoHora, horaFin)) {
-            System.out.println("La hora de inicio o fin no cumple con el formato de 24 horas (HH:mm).");
+            JOptionPane.showMessageDialog(null, "La hora de inicio o fin no cumple con el formato de 24 horas (HH:mm).");
             return false;
         }
 
         // Valida que la hora de inicio sea antes que la hora de fin
         if (LocalTime.parse(horaInicio).isAfter(LocalTime.parse(horaFin))) {
-            System.out.println("La hora de inicio no puede ser posterior a la hora de fin.");
+            JOptionPane.showMessageDialog(null, "La hora de inicio no puede ser posterior a la hora de fin.");
             return false;
         }
 
@@ -116,11 +116,11 @@ public class HorarioController {
 
     public boolean delete(int idHorario) {
         if (idHorario <= 0) {
-            System.out.println("El ID del horario no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID del horario no puede ser negativo o cero.");
             return false;
         }
         if (horarioDAO.read(idHorario) == null) {
-            System.out.println("El horario que intenta eliminar no existe.");
+            JOptionPane.showMessageDialog(null, "El horario que intenta eliminar no existe.");
             return false;
         }
         return horarioDAO.delete(idHorario);

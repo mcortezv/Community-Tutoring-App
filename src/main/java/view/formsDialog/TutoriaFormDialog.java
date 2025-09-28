@@ -53,10 +53,6 @@ public final class TutoriaFormDialog extends Dialog {
                 setTitle("Eliminar Tutoria");
                 deleteTutoria();
             }
-            case 4 -> {
-                setTitle("Listar Tutorias");
-                readAllTutorias();
-            }
             default -> {}
         }
     }
@@ -105,13 +101,15 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!controller.getTutoriaController().create(fechaField.getText().trim(),
+            if (controller.getTutoriaController().create(fechaField.getText().trim(),
                     horaField.getText().trim(),
                     estadoField.getText().trim(),
                     controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
                     controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
                     controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutoria agregada con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se ha podido agregar");
             }
             dispose();
         });
@@ -146,6 +144,8 @@ public final class TutoriaFormDialog extends Dialog {
             Tutoria tutoria = controller.getTutoriaController().read(Integer.parseInt(idField.getText().trim()));
             if (tutoria != null) {
                 JOptionPane.showMessageDialog(centerPanel, tutoria.toString());
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "Tutoria no encontrada");
             }
             dispose();
         });
@@ -206,7 +206,7 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (!controller.getTutoriaController().update(Integer.parseInt(idField.getText().trim()),
+            if (controller.getTutoriaController().update(Integer.parseInt(idField.getText().trim()),
                     fechaField.getText().trim(),
                     horaField.getText().trim(),
                     estadoField.getText().trim(),
@@ -214,6 +214,8 @@ public final class TutoriaFormDialog extends Dialog {
                     controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
                     controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutoria actualizada con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se pudo actualizar");
             }
             dispose();
         });
@@ -246,8 +248,10 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (!controller.getTutoriaController().delete(Integer.parseInt(idField.getText().trim()))) {
+            if (controller.getTutoriaController().delete(Integer.parseInt(idField.getText().trim()))) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutoria eliminada con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se pudo eliminar");
             }
             dispose();
         });
@@ -258,7 +262,4 @@ public final class TutoriaFormDialog extends Dialog {
         add(southPanel, BorderLayout.SOUTH);
     }
 
-    public void readAllTutorias() {
-        controller.getTutoriaController().readAll();
-    }
 }

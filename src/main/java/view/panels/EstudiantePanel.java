@@ -20,7 +20,6 @@ public class EstudiantePanel extends Panel {
     private Button btnReadEstudiante;
     private Button btnUpdateEstudiante;
     private Button btnDeleteEstudiante;
-    private Button btnReadAllEstudiantes;
     private TablePanel tablePanel;
     private MainController controller;
 
@@ -36,34 +35,31 @@ public class EstudiantePanel extends Panel {
         btnReadEstudiante = new Button("Buscar Estudiante");
         btnUpdateEstudiante = new Button("Actualizar Estudiante");
         btnDeleteEstudiante = new Button("Eliminar Estudiante");
-        btnReadAllEstudiantes = new Button("Listar Estudiantes");
         tablePanel = new TablePanel();
         btnCreateEstudiante.setPreferredSize(new Dimension(230, 40));
         btnReadEstudiante.setPreferredSize(new Dimension(230, 40));
         btnUpdateEstudiante.setPreferredSize(new Dimension(230, 40));
         btnDeleteEstudiante.setPreferredSize(new Dimension(230, 40));
-        btnReadAllEstudiantes.setPreferredSize(new Dimension(230, 40));
         btnCreateEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 0).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
         });
         btnReadEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 1).setVisible(true);
         });
         btnUpdateEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 2).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
         });
         btnDeleteEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 3).setVisible(true);
-        });
-        btnReadAllEstudiantes.addActionListener(e -> {
-            new EstudianteFormDialog(mainFrame, controller, 4).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
         });
 
         leftPanel.add(btnCreateEstudiante);
         leftPanel.add(btnReadEstudiante);
         leftPanel.add(btnUpdateEstudiante);
         leftPanel.add(btnDeleteEstudiante);
-        leftPanel.add(btnReadAllEstudiantes);
         rightPanel.add(tablePanel);
     }
 }

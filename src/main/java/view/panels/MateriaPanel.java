@@ -20,7 +20,6 @@ public class MateriaPanel extends Panel {
     private Button btnReadMateria;
     private Button btnUpdateMateria;
     private Button btnDeleteMateria;
-    private Button btnReadAllMaterias;
     private TablePanel tablePanel;
     private MainController controller;
 
@@ -36,16 +35,15 @@ public class MateriaPanel extends Panel {
         btnReadMateria =  new Button("Buscar Materia");
         btnUpdateMateria =  new Button("Actualizar Materia");
         btnDeleteMateria =  new Button("Eliminar Materia");
-        btnReadAllMaterias =  new Button("Listar Materias");
         tablePanel = new TablePanel();
         btnCreateMateria.setPreferredSize(new Dimension(230, 40));
         btnReadMateria.setPreferredSize(new Dimension(230, 40));
         btnUpdateMateria.setPreferredSize(new Dimension(230, 40));
         btnDeleteMateria.setPreferredSize(new Dimension(230, 40));
-        btnReadAllMaterias.setPreferredSize(new Dimension(230, 40));
 
         btnCreateMateria.addActionListener(e -> {
             new MateriaFormDialog(mainFrame, controller, 0).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelMaterias(controller.getMateriaController().readAll()));
         });
 
         btnReadMateria.addActionListener(e -> {
@@ -54,21 +52,18 @@ public class MateriaPanel extends Panel {
 
         btnUpdateMateria.addActionListener(e -> {
             new MateriaFormDialog(mainFrame, controller, 2).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelMaterias(controller.getMateriaController().readAll()));
         });
 
         btnDeleteMateria.addActionListener(e -> {
             new MateriaFormDialog(mainFrame, controller, 3).setVisible(true);
-        });
-
-        btnReadAllMaterias.addActionListener(e -> {
-            new MateriaFormDialog(mainFrame, controller, 4).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelMaterias(controller.getMateriaController().readAll()));
         });
 
         leftPanel.add(btnCreateMateria);
         leftPanel.add(btnReadMateria);
         leftPanel.add(btnUpdateMateria);
         leftPanel.add(btnDeleteMateria);
-        leftPanel.add(btnReadAllMaterias);
         rightPanel.add(tablePanel);
     }
 }

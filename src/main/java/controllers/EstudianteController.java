@@ -49,7 +49,7 @@ public class EstudianteController {
 
     public Estudiante read(int idEstudiante) {
         if (idEstudiante <= 0) {
-            System.out.println("El ID no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID no puede ser negativo o cero.");
             return null; // Devuelve null si el ID es inválido 
         }
         return estudianteDAO.read(idEstudiante);
@@ -58,22 +58,22 @@ public class EstudianteController {
     public boolean update(int idEstudiante, String nombre, String gradoEscolar, int edad, String telefono, String escuelaProcedencia) {
         // Valida el ID primero
         if (idEstudiante <= 0) {
-            System.out.println("El ID no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID no puede ser negativo o cero.");
             return false;
         }
         // Valida que los objetos no sean nulos
         if (nombre == null || gradoEscolar == null || telefono == null || escuelaProcedencia == null) {
-            System.out.println("Ningun dato puede ser nulo.");
+            JOptionPane.showMessageDialog(null, "Ningun dato puede ser nulo.");
             return false;
         }
         // Valida que las cadenas de texto no estén vacías o solo contengan espacios
         if (nombre.trim().isEmpty() || gradoEscolar.trim().isEmpty() || telefono.trim().isEmpty() || escuelaProcedencia.trim().isEmpty()) {
-            System.out.println("Ningun campo de texto puede estar vacío.");
+            JOptionPane.showMessageDialog(null, "Ningun campo de texto puede estar vacío.");
             return false;
         }
         // Verifica que el estudiante exista
         if (estudianteDAO.read(idEstudiante) == null) {
-            System.out.println("El estudiante con el ID proporcionado no existe.");
+            JOptionPane.showMessageDialog(null, "El estudiante con el ID proporcionado no existe.");
             return false;
         }
         Estudiante estudiante = new Estudiante(idEstudiante, nombre, gradoEscolar, edad, telefono, escuelaProcedencia);
@@ -82,18 +82,17 @@ public class EstudianteController {
 
     public boolean delete(int idEstudiante) {
         if (idEstudiante <= 0) {
-            System.out.println("El ID no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID no puede ser negativo o cero.");
             return false;
         }
         if (estudianteDAO.read(idEstudiante) == null) {
-            System.out.println("El estudiante que intenta eliminar no existe.");
+            JOptionPane.showMessageDialog(null, "El estudiante que intenta eliminar no existe.");
             return false;
         }
         return estudianteDAO.delete(idEstudiante);
     }
 
     public List<Estudiante> readAll() {
-        System.out.println("El estudiante que intenta eliminar no existe.");
         return estudianteDAO.readAll();
     }
 }

@@ -51,10 +51,6 @@ public final class MateriaFormDialog extends Dialog {
                 setTitle("Eliminar Materia");
                 deleteMateria();
             }
-            case 4 -> {
-                setTitle("Listar Materias");
-                readAllMaterias();
-            }
             default -> {}
         }
     }
@@ -85,10 +81,12 @@ public final class MateriaFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!controller.create(nombreField.getText().trim(),
+            if (controller.create(nombreField.getText().trim(),
                     nivelField.getText().trim(),
                     descripcionField.getText().trim())) {
                 JOptionPane.showMessageDialog(centerPanel, "Materia agregada con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo agregar");
             }
             dispose();
         });
@@ -120,6 +118,8 @@ public final class MateriaFormDialog extends Dialog {
             Materia materia = controller.read(Integer.parseInt(idField.getText().trim()));
             if (materia != null) {
                 JOptionPane.showMessageDialog(centerPanel, materia.toString());
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "Materia no encontrada");
             }
             dispose();
         });
@@ -162,11 +162,13 @@ public final class MateriaFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (!controller.update(Integer.parseInt(idField.getText().trim()),
+            if (controller.update(Integer.parseInt(idField.getText().trim()),
                     nombreField.getText().trim(),
                     nivelField.getText().trim(),
                     descripcionField.getText().trim())) {
                 JOptionPane.showMessageDialog(centerPanel, "Materia actualizada con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo actualizar");
             }
             dispose();
         });
@@ -196,8 +198,10 @@ public final class MateriaFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
-                JOptionPane.showMessageDialog(centerPanel, "Estudiante eliminado con exito");
+            if (controller.delete(Integer.parseInt(idField.getText().trim()))) {
+                JOptionPane.showMessageDialog(centerPanel, "Materia eliminada con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo eliminar");
             }
             dispose();
         });
@@ -208,7 +212,4 @@ public final class MateriaFormDialog extends Dialog {
         add(southPanel, BorderLayout.SOUTH);
     }
 
-    public void readAllMaterias() {
-        controller.readAll();
-    }
 }

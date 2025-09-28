@@ -52,10 +52,6 @@ public final class TutorFormDialog extends Dialog {
                 setTitle("Eliminar Tutor");
                 deleteTutor();
             }
-            case 4 -> {
-                setTitle("Listar Tutor");
-                readAllTutores();
-            }
             default -> {}
         }
     }
@@ -92,11 +88,13 @@ public final class TutorFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!controller.create(nombreField.getText().trim(),
+            if (controller.create(nombreField.getText().trim(),
                     telefonoField.getText().trim(),
                     correoField.getText().trim(),
                     especialidadField.getText().trim())) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutor agregado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Tutor no se pudo agregar");
             }
             dispose();
         });
@@ -129,6 +127,8 @@ public final class TutorFormDialog extends Dialog {
             Tutor tutor = controller.read(Integer.parseInt(idField.getText().trim()));
             if (tutor != null) {
                 JOptionPane.showMessageDialog(centerPanel, tutor.toString());
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "La Tutor no se pudo encontrar");
             }
             dispose();
         });
@@ -177,12 +177,14 @@ public final class TutorFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (!controller.update(Integer.parseInt(idField.getText().trim()),
+            if (controller.update(Integer.parseInt(idField.getText().trim()),
                     nombreField.getText().trim(),
                     telefonoField.getText().trim(),
                     correoField.getText().trim(),
                     especialidadField.getText().trim())) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutor actualizado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Tutor no se pudo actualizar");
             }
             dispose();
         });
@@ -213,8 +215,10 @@ public final class TutorFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
+            if (controller.delete(Integer.parseInt(idField.getText().trim()))) {
                 JOptionPane.showMessageDialog(centerPanel, "Tutor eliminado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Tutor no se pudo eliminar");
             }
             dispose();
         });
@@ -223,9 +227,5 @@ public final class TutorFormDialog extends Dialog {
         southPanel.add(btnDelete);
         add(centerPanel, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
-    }
-
-    public void readAllTutores() {
-        controller.readAll();
     }
 }

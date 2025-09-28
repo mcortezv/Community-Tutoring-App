@@ -5,6 +5,7 @@
 package controllers;
 import DAO.TutorDAO;
 import models.Tutor;
+import javax.swing.*;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -23,37 +24,37 @@ public class TutorController {
     public boolean create(String nombre, String telefono, String correo, String especialidad) {
         // Valida que los objetos no sean nulos
         if (nombre == null || telefono == null || correo == null || especialidad == null) {
-            System.out.println("Ningún campo puede ser nulo.");
+            JOptionPane.showMessageDialog(null, "Ningún campo puede ser nulo.");
             return false;
         }
 
         // Valida que las cadenas no estén vacías o contengan solo espacios en blanco.
         if (nombre.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || especialidad.trim().isEmpty()) {
-            System.out.println("Ningún campo puede estar vacío.");
+            JOptionPane.showMessageDialog(null, "Ningún campo puede estar vacío.");
             return false;
         }
 
         // Valida que el nombre solo contenga letras y espacios.
         if (!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", nombre)) {
-            System.out.println("El nombre solo puede contener letras y espacios.");
+            JOptionPane.showMessageDialog(null, "El nombre solo puede contener letras y espacios.");
             return false;
         }
 
         // Valida que el teléfono contenga 10 dígitos numéricos.
         if (!Pattern.matches("\\d{10}", telefono)) {
-            System.out.println("El teléfono debe contener exactamente 10 dígitos numéricos.");
+            JOptionPane.showMessageDialog(null, "El teléfono debe contener exactamente 10 dígitos numéricos.");
             return false;
         }
 
         // Valida un formato de correo electrónico estándar.
         if (!Pattern.matches("^[\\w._%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", correo)) {
-            System.out.println("El formato del correo electrónico no es válido.");
+            JOptionPane.showMessageDialog(null, "El formato del correo electrónico no es válido.");
             return false;
         }
 
         // Valida una longitud razonable para la especialidad.
         if (especialidad.trim().length() < 5 || especialidad.trim().length() > 100) {
-            System.out.println("La especialidad debe tener entre 5 y 100 caracteres.");
+            JOptionPane.showMessageDialog(null, "La especialidad debe tener entre 5 y 100 caracteres.");
             return false;
         }
 
@@ -63,7 +64,7 @@ public class TutorController {
 
     public Tutor read(int idTutor) {
         if (idTutor <= 0) {
-            System.out.println("El ID del tutor no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID del tutor no puede ser negativo o cero.");
             return null; // Evita una consulta innecesaria a la BD.
         }
         return tutorDAO.read(idTutor);
@@ -72,44 +73,44 @@ public class TutorController {
     public boolean update(int idTutor, String nombre, String telefono, String correo, String especialidad) {
         // Valida el ID primero.
         if (idTutor <= 0) {
-            System.out.println("El ID del tutor no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID del tutor no puede ser negativo o cero.");
             return false;
         }
 
         if (tutorDAO.read(idTutor) == null) {
-            System.out.println("El tutor que intenta actualizar no existe.");
+            JOptionPane.showMessageDialog(null, "El tutor que intenta actualizar no existe.");
             return false;
         }
 
         // Valida que los demás campos no sean nulos.
         if (nombre == null || telefono == null || correo == null || especialidad == null) {
-            System.out.println("Ningún campo puede ser nulo.");
+            JOptionPane.showMessageDialog(null, "Ningún campo puede ser nulo.");
             return false;
         }
         // Valida que las cadenas no estén vacías.
         if (nombre.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || especialidad.trim().isEmpty()) {
-            System.out.println("Ningún campo puede estar vacío.");
+            JOptionPane.showMessageDialog(null, "Ningún campo puede estar vacío.");
             return false;
         }
 
         // Reutiliza las mismas validaciones del método create.
         if (!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", nombre)) {
-            System.out.println("El nombre solo puede contener letras y espacios.");
+            JOptionPane.showMessageDialog(null, "El nombre solo puede contener letras y espacios.");
             return false;
         }
 
         if (!Pattern.matches("\\d{10}", telefono)) {
-            System.out.println("El teléfono debe contener exactamente 10 dígitos numéricos.");
+            JOptionPane.showMessageDialog(null, "El teléfono debe contener exactamente 10 dígitos numéricos.");
             return false;
         }
 
         if (!Pattern.matches("^[\\w._%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", correo)) {
-            System.out.println("El formato del correo electrónico no es válido.");
+            JOptionPane.showMessageDialog(null, "El formato del correo electrónico no es válido.");
             return false;
         }
 
         if (especialidad.trim().length() < 5 || especialidad.trim().length() > 100) {
-            System.out.println("La especialidad debe tener entre 5 y 100 caracteres.");
+            JOptionPane.showMessageDialog(null, "La especialidad debe tener entre 5 y 100 caracteres.");
             return false;
         }
 
@@ -119,11 +120,11 @@ public class TutorController {
 
     public boolean delete(int idTutor) {
         if (idTutor <= 0) {
-            System.out.println("El ID del tutor no puede ser negativo o cero.");
+            JOptionPane.showMessageDialog(null, "El ID del tutor no puede ser negativo o cero.");
             return false;
         }
         if (tutorDAO.read(idTutor) == null) {
-            System.out.println("El tutor que intenta eliminar no existe.");
+            JOptionPane.showMessageDialog(null, "El tutor que intenta eliminar no existe.");
             return false;
         }
         return tutorDAO.delete(idTutor);

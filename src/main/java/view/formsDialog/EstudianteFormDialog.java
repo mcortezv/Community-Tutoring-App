@@ -53,10 +53,6 @@ public final class EstudianteFormDialog extends Dialog {
                 setTitle("Eliminar Estudiante");
                 deleteEstudiante();
             }
-            case 4 -> {
-                setTitle("Listar Estudiantes");
-                readAllEstudiantes();
-            }
             default -> {}
         }
     }
@@ -99,13 +95,16 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!controller.create(nombreField.getText().trim(),
+            if (controller.create(nombreField.getText().trim(),
                     gradoEscolarField.getText().trim(),
                     Integer.parseInt(edadField.getText().trim()),
                     telefonoField.getText().trim(),
                     escuelaField.getText().trim())) {
                 JOptionPane.showMessageDialog(centerPanel, "Estudiante agregado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo agregar");
             }
+
             dispose();
         });
 
@@ -138,6 +137,8 @@ public final class EstudianteFormDialog extends Dialog {
             Estudiante estudiante = controller.read(Integer.parseInt(idField.getText().trim()));
             if (estudiante != null) {
                 JOptionPane.showMessageDialog(centerPanel, estudiante.toString());
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "Estudiante no encontrado");
             }
             dispose();
         });
@@ -192,13 +193,15 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (!controller.update(Integer.parseInt(idField.getText().trim()),
+            if (controller.update(Integer.parseInt(idField.getText().trim()),
                     nombreField.getText().trim(),
                     gradoEscolarField.getText().trim(),
                     Integer.parseInt(edadField.getText().trim()),
                     telefonoField.getText().trim(),
                     escuelaField.getText().trim())) {
                 JOptionPane.showMessageDialog(centerPanel, "Estudiante actualizado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo actualizar");
             }
             dispose();
         });
@@ -232,6 +235,8 @@ public final class EstudianteFormDialog extends Dialog {
         btnDelete.addActionListener(e -> {
             if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
                 JOptionPane.showMessageDialog(centerPanel, "Estudiante eliminado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo eliminar");
             }
             dispose();
         });
@@ -240,9 +245,5 @@ public final class EstudianteFormDialog extends Dialog {
         southPanel.add(btnDelete);
         add(centerPanel, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
-    }
-
-    public void readAllEstudiantes() {
-        controller.readAll();
     }
 }

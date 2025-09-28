@@ -20,7 +20,6 @@ public class TutorPanel extends Panel {
     private Button btnReadTutor;
     private Button btnUpdateTutor;
     private Button btnDeleteTutor;
-    private Button btnReadAllTutores;
     private TablePanel tablePanel;
     private MainController controller;
 
@@ -36,16 +35,15 @@ public class TutorPanel extends Panel {
         btnReadTutor = new Button("Buscar Tutor");
         btnUpdateTutor = new Button("Actualizar Tutor");
         btnDeleteTutor = new Button("Eliminar Tutor");
-        btnReadAllTutores = new Button("Listar Tutores");
         tablePanel = new TablePanel();
         btnCreateTutor.setPreferredSize(new Dimension(230, 40));
         btnReadTutor.setPreferredSize(new Dimension(230, 40));
         btnUpdateTutor.setPreferredSize(new Dimension(230, 40));
         btnDeleteTutor.setPreferredSize(new Dimension(230, 40));
-        btnReadAllTutores.setPreferredSize(new Dimension(230, 40));
 
         btnCreateTutor.addActionListener(e -> {
             new TutorFormDialog(mainFrame, controller, 0).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
         });
 
         btnReadTutor.addActionListener(e -> {
@@ -54,22 +52,19 @@ public class TutorPanel extends Panel {
 
         btnUpdateTutor.addActionListener(e -> {
             new TutorFormDialog(mainFrame, controller, 2).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
 
         });
 
         btnDeleteTutor.addActionListener(e -> {
             new TutorFormDialog(mainFrame, controller, 3).setVisible(true);
-        });
-
-        btnReadAllTutores.addActionListener(e -> {
-            new TutorFormDialog(mainFrame, controller, 4).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
         });
 
         leftPanel.add(btnCreateTutor);
         leftPanel.add(btnReadTutor);
         leftPanel.add(btnUpdateTutor);
         leftPanel.add(btnDeleteTutor);
-        leftPanel.add(btnReadAllTutores);
         rightPanel.add(tablePanel);
     }
 }
