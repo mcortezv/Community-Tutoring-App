@@ -125,4 +125,9 @@ public class MateriaController {
     public List<Materia> readAll() {
         return materiaDAO.readAll();
     }
+    
+    //CONSTRUCTOR PARA LAS PRUEBAS
+    public MateriaController(IMateriaDAO materiaDAO) {
+        this.materiaDAO = materiaDAO;
+    }
 }

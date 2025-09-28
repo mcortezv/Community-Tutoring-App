@@ -4,6 +4,7 @@
  */
 package controllers;
 import DAO.TutoriaDAO;
+import interfaces.ITutoriaDAO;
 import models.*;
 import javax.swing.*;
 import java.util.Arrays;
@@ -15,28 +16,25 @@ import java.util.regex.Pattern;
  * @author Cortez, Manuel;
  */
 public class TutoriaController {
-    private final TutoriaDAO tutoriaDAO;
+    
+    private final ITutoriaDAO tutoriaDAO;
     private final String[] estados = {"Programada", "En curso", "Completada"};
 
     public TutoriaController() {
-        tutoriaDAO = new TutoriaDAO();
+        this.tutoriaDAO = new TutoriaDAO();
     }
 
     public boolean create(String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia){
         if (fecha == null  || hora == null || estado == null || tutor == null || estudiante == null || materia == null) {
-            JOptionPane.showMessageDialog(null, "Ningun dato no puede estar vacio");
             return false;
         }
         if (!Pattern.matches("^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", fecha)){
-            JOptionPane.showMessageDialog(null, "La fecha no cumple con el formato");
             return false;
         }
         if (!Pattern.matches("^([01]\\d|2[0-3]):[0-5]\\d$", hora)){
-            JOptionPane.showMessageDialog(null, "La hora no cumple con el formato");
             return false;
         }
         if (!Arrays.asList(estados).contains(estado)) {
-            JOptionPane.showMessageDialog(null, "Estado inexistente (Programada, En curso, Completada)");
             return false;
         }
         Tutoria tutoria = new Tutoria(fecha, hora, estado, tutor, estudiante, materia);
@@ -45,33 +43,28 @@ public class TutoriaController {
 
     public Tutoria read(int idTutoria){
         if (idTutoria <= 0){
-            JOptionPane.showMessageDialog(null, "El ID no puede ser negativa");
+            return null;
         }
         return tutoriaDAO.read(idTutoria);
     }
 
     public boolean update(int idTutoria, String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia){
         if (idTutoria <= 0){
-            JOptionPane.showMessageDialog(null, "El ID no puede ser negativa");
+            return false;
         }
         if (fecha == null  || hora == null || estado == null || tutor == null || estudiante == null || materia == null) {
-            JOptionPane.showMessageDialog(null, "Ningun dato no puede estar vacio");
             return false;
         }
         if (tutoriaDAO.read(idTutoria) == null) {
-            JOptionPane.showMessageDialog(null, "El estudiante no existe");
             return false;
         }
         if (!Pattern.matches("^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", fecha)){
-            JOptionPane.showMessageDialog(null, "La fecha no cumple con el formato");
             return false;
         }
         if (!Pattern.matches("^([01]\\d|2[0-3]):[0-5]\\d$", hora)){
-            JOptionPane.showMessageDialog(null, "La hora no cumple con el formato");
             return false;
         }
         if (!Arrays.asList(estados).contains(estado)) {
-            JOptionPane.showMessageDialog(null, "Estado inexistente (Programada, En curso, Completada)");
             return false;
         }
         Tutoria tutoria = new Tutoria(idTutoria, fecha, hora, estado, tutor, estudiante, materia);
@@ -80,16 +73,20 @@ public class TutoriaController {
 
     public boolean delete(int idTutoria){
         if (idTutoria <= 0){
-            JOptionPane.showMessageDialog(null, "El ID no puede ser negativa");
-        }
-        if (tutoriaDAO.read(idTutoria) == null) {
-            JOptionPane.showMessageDialog(null, "El estudiante no existe");
             return false;
         }
-        return  tutoriaDAO.delete(idTutoria);
+        if (tutoriaDAO.read(idTutoria) == null) {
+            return false;
+        }
+        return tutoriaDAO.delete(idTutoria);
     }
 
     public List<Tutoria> readAll(){
         return tutoriaDAO.readAll();
+    }
+    
+    //CONTRUCTOR PARA LAS PRUEBAS
+    public TutoriaController(ITutoriaDAO tutoriaDAO) {
+        this.tutoriaDAO = tutoriaDAO;
     }
 }

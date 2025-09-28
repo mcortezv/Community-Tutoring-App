@@ -95,4 +95,9 @@ public class EstudianteController {
     public List<Estudiante> readAll() {
         return estudianteDAO.readAll();
     }
+
+    // CONSTRUCTOR PARA LAS PRUEBAS
+    public EstudianteController(IEstudianteDAO estudianteDAO) {
+        this.estudianteDAO = estudianteDAO;
+    }
 }
