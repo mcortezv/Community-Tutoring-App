@@ -2,5 +2,4 @@ Pruebas Unitarias
 Hacer las tablas no editables
 Mejorar Validadores
 Ajustar Text Fields
-Eliminar un objeto cuando otro se elimina
-Actualizar tabla de entidades on delete cascade
+Fechas y Horas con Calendar

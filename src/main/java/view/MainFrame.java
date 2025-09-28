@@ -77,27 +77,46 @@ public final class MainFrame extends JFrame {
         btnHorarios.setPreferredSize(new Dimension(160, 40));
         btnMaterias.setPreferredSize(new Dimension(160, 40));
         btnTutorias.setPreferredSize(new Dimension(160, 40));
-        btnEstudiantes.addActionListener(e -> showPanel(estudiantePanel));
+        btnEstudiantes.addActionListener(e -> {
+            estudiantePanel.updateTable();
+            showPanel(estudiantePanel);
+        });
         btnEstudiantes.addActionListener(e -> {
             btnInUse = btnEstudiantes;
             northPanel.setInUseButton(btnInUse);
         });
-        btnTutores.addActionListener(e -> showPanel(tutorPanel));
+
+        btnTutores.addActionListener(e -> {
+            tutoriaPanel.updateTable();
+            showPanel(tutorPanel);
+        });
         btnTutores.addActionListener(e -> {
             btnInUse = btnTutores;
             northPanel.setInUseButton(btnInUse);
         });
-        btnHorarios.addActionListener(e -> showPanel(horarioPanel));
+
+        btnHorarios.addActionListener(e -> {
+            horarioPanel.updateTable();
+            showPanel(horarioPanel);
+        });
         btnHorarios.addActionListener(e -> {
             btnInUse = btnHorarios;
             northPanel.setInUseButton(btnInUse);
         });
-        btnMaterias.addActionListener(e -> showPanel(materiaPanel));
+
+        btnMaterias.addActionListener(e -> {
+            materiaPanel.updateTable();
+            showPanel(materiaPanel);
+        });
         btnMaterias.addActionListener(e -> {
             btnInUse = btnMaterias;
             northPanel.setInUseButton(btnInUse);
         });
-        btnTutorias.addActionListener(e -> showPanel(tutoriaPanel));
+
+        btnTutorias.addActionListener(e -> {
+            tutoriaPanel.updateTable();
+            showPanel(tutoriaPanel);
+        });
         btnTutorias.addActionListener(e -> {
             btnInUse = btnTutorias;
             northPanel.setInUseButton(btnInUse);
