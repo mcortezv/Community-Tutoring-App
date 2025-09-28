@@ -26,7 +26,7 @@ public class TutorPanel extends Panel {
     public TutorPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
         this.controller = controller;
-        tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
+        updateTable();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class TutorPanel extends Panel {
 
         btnCreateTutor.addActionListener(e -> {
             new TutorFormDialog(mainFrame, controller, 0).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
+            updateTable();
         });
 
         btnReadTutor.addActionListener(e -> {
@@ -52,13 +52,13 @@ public class TutorPanel extends Panel {
 
         btnUpdateTutor.addActionListener(e -> {
             new TutorFormDialog(mainFrame, controller, 2).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
+            updateTable();
 
         });
 
         btnDeleteTutor.addActionListener(e -> {
             new TutorFormDialog(mainFrame, controller, 3).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
+            updateTable();
         });
 
         leftPanel.add(btnCreateTutor);
@@ -66,5 +66,9 @@ public class TutorPanel extends Panel {
         leftPanel.add(btnUpdateTutor);
         leftPanel.add(btnDeleteTutor);
         rightPanel.add(tablePanel);
+    }
+
+    public void updateTable(){
+        tablePanel.setFullModel(TableModel.listToTableModelTutor(controller.getTutorController().readAll()));
     }
 }

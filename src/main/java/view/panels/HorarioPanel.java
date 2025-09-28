@@ -26,7 +26,7 @@ public class HorarioPanel extends Panel {
     public HorarioPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
         this.controller = controller;
-        tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
+        updateTable();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class HorarioPanel extends Panel {
 
         btnCreateHorario.addActionListener(e -> {
             new HorarioFormDialog(mainFrame, controller, 0).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
+            updateTable();
         });
 
         btnReadHorario.addActionListener(e -> {
@@ -52,12 +52,12 @@ public class HorarioPanel extends Panel {
 
         btnUpdateHorario.addActionListener(e -> {
             new HorarioFormDialog(mainFrame, controller, 2).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
+            updateTable();
         });
 
         btnDeleteHorario.addActionListener(e -> {
             new HorarioFormDialog(mainFrame, controller, 3).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
+            updateTable();
         });
 
         leftPanel.add(btnCreateHorario);
@@ -65,5 +65,9 @@ public class HorarioPanel extends Panel {
         leftPanel.add(btnUpdateHorario);
         leftPanel.add(btnDeleteHorario);
         rightPanel.add(tablePanel);
+    }
+
+    public void updateTable() {
+        tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
     }
 }

@@ -26,7 +26,7 @@ public class EstudiantePanel extends Panel {
     public EstudiantePanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
         this.controller = controller;
-        tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
+        updateTable();
     }
 
     @Override
@@ -42,18 +42,18 @@ public class EstudiantePanel extends Panel {
         btnDeleteEstudiante.setPreferredSize(new Dimension(230, 40));
         btnCreateEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 0).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
+            updateTable();
         });
         btnReadEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 1).setVisible(true);
         });
         btnUpdateEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 2).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
+            updateTable();
         });
         btnDeleteEstudiante.addActionListener(e -> {
             new EstudianteFormDialog(mainFrame, controller, 3).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
+            updateTable();
         });
 
         leftPanel.add(btnCreateEstudiante);
@@ -61,5 +61,9 @@ public class EstudiantePanel extends Panel {
         leftPanel.add(btnUpdateEstudiante);
         leftPanel.add(btnDeleteEstudiante);
         rightPanel.add(tablePanel);
+    }
+
+    public void updateTable() {
+        tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
     }
 }

@@ -43,7 +43,7 @@ public class MateriaPanel extends Panel {
 
         btnCreateMateria.addActionListener(e -> {
             new MateriaFormDialog(mainFrame, controller, 0).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelMaterias(controller.getMateriaController().readAll()));
+            updateTable();
         });
 
         btnReadMateria.addActionListener(e -> {
@@ -52,12 +52,12 @@ public class MateriaPanel extends Panel {
 
         btnUpdateMateria.addActionListener(e -> {
             new MateriaFormDialog(mainFrame, controller, 2).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelMaterias(controller.getMateriaController().readAll()));
+            updateTable();
         });
 
         btnDeleteMateria.addActionListener(e -> {
             new MateriaFormDialog(mainFrame, controller, 3).setVisible(true);
-            tablePanel.setFullModel(TableModel.listToTableModelMaterias(controller.getMateriaController().readAll()));
+            updateTable();
         });
 
         leftPanel.add(btnCreateMateria);
@@ -65,5 +65,9 @@ public class MateriaPanel extends Panel {
         leftPanel.add(btnUpdateMateria);
         leftPanel.add(btnDeleteMateria);
         rightPanel.add(tablePanel);
+    }
+
+    public void updateTable() {
+        tablePanel.setFullModel(TableModel.listToTableModelMaterias(controller.getMateriaController().readAll()));
     }
 }
