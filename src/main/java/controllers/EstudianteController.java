@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controllers;
+
 import DAO.EstudianteDAO;
 import interfaces.IEstudianteDAO;
 import models.Estudiante;
@@ -11,8 +12,12 @@ import java.util.regex.Pattern;
 
 /**
  *
+<<<<<<< HEAD
  * @author Angel Beltran;
  * @author Cortez, Manuel (Modificado por Angel);
+=======
+ * @author Cortez, Manuel(modificado por Angel);
+>>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
  */
 public class EstudianteController {
     private final IEstudianteDAO estudianteDAO;
@@ -27,7 +32,11 @@ public class EstudianteController {
             System.out.println("Ningun dato puede ser nulo.");
             return false;
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que las cadenas de texto no estén vacías o solo contengan espacios
         if (nombre.trim().isEmpty() || gradoEscolar.trim().isEmpty() || telefono.trim().isEmpty() || escuelaProcedencia.trim().isEmpty()) {
             System.out.println("Ningun campo de texto puede estar vacío.");
@@ -39,7 +48,11 @@ public class EstudianteController {
             System.out.println("La edad debe estar en un rango válido (ej. 3-100).");
             return false;
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
 
         // Valida que el teléfono tenga 10 dígitos numéricos
         if (!Pattern.matches("\\d{10}", telefono)) {
@@ -71,7 +84,11 @@ public class EstudianteController {
             System.out.println("Ningun dato puede ser nulo.");
             return false;
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que las cadenas de texto no estén vacías o solo contengan espacios
         if (nombre.trim().isEmpty() || gradoEscolar.trim().isEmpty() || telefono.trim().isEmpty() || escuelaProcedencia.trim().isEmpty()) {
             System.out.println("Ningun campo de texto puede estar vacío.");
@@ -82,13 +99,21 @@ public class EstudianteController {
             System.out.println("El estudiante con el ID proporcionado no existe.");
             return false;
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida un rango de edad sdfsfsfsdfsdfsfs
         if (edad <= 2 || edad > 100) {
             System.out.println("La edad debe estar en un rango válido (ej. 3-100).");
             return false;
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
 
         // Valida que el teléfono tenga 10 dígitos numéricos
         if (!Pattern.matches("\\d{10}", telefono)) {
@@ -112,9 +137,17 @@ public class EstudianteController {
         return estudianteDAO.delete(idEstudiante);
     }
 
+<<<<<<< HEAD
     public List<Estudiante> readAllEstudiantes() {
         System.out.println("El estudiante que intenta eliminar no existe.");
         return estudianteDAO.readAll();
     }
 
 }
+=======
+    public List<Estudiante> readAll() {
+        System.out.println("El estudiante que intenta eliminar no existe.");
+        return estudianteDAO.readAll();
+    }
+}
+>>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
