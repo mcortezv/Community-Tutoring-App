@@ -4,6 +4,7 @@
  */
 package view.panels;
 import controllers.MainController;
+import utils.TableModel;
 import view.MainFrame;
 import view.formsDialog.HorarioFormDialog;
 import view.styles.Panel;
@@ -20,11 +21,13 @@ public class HorarioPanel extends Panel {
     private Button btnUpdateHorario;
     private Button btnDeleteHorario;
     private Button btnReadAllHorarios;
+    private TablePanel tablePanel;
     private MainController controller;
 
     public HorarioPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
         this.controller = controller;
+        tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
     }
 
     @Override
@@ -34,7 +37,7 @@ public class HorarioPanel extends Panel {
         btnUpdateHorario =  new Button("Actualizar Horario");
         btnDeleteHorario =  new Button("Eliminar Horario");
         btnReadAllHorarios =  new Button("Listar Horarios");
-
+        tablePanel = new TablePanel();
         btnCreateHorario.setPreferredSize(new Dimension(230, 40));
         btnReadHorario.setPreferredSize(new Dimension(230, 40));
         btnUpdateHorario.setPreferredSize(new Dimension(230, 40));
@@ -61,10 +64,11 @@ public class HorarioPanel extends Panel {
             new HorarioFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
-        centralPanel.add(btnCreateHorario);
-        centralPanel.add(btnReadHorario);
-        centralPanel.add(btnUpdateHorario);
-        centralPanel.add(btnDeleteHorario);
-        centralPanel.add(btnReadAllHorarios);
+        leftPanel.add(btnCreateHorario);
+        leftPanel.add(btnReadHorario);
+        leftPanel.add(btnUpdateHorario);
+        leftPanel.add(btnDeleteHorario);
+        leftPanel.add(btnReadAllHorarios);
+        rightPanel.add(tablePanel);
     }
 }

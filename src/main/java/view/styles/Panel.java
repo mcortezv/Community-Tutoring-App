@@ -15,7 +15,8 @@ import javax.swing.JPanel;
  */
 public abstract class Panel extends JPanel {
     protected MainFrame mainFrame;
-    protected JPanel centralPanel;
+    protected JPanel leftPanel;
+    protected JPanel rightPanel;
     protected JPanel southPanel;
     protected Button btnBack;
     protected NorthPanel northPanel;
@@ -24,20 +25,26 @@ public abstract class Panel extends JPanel {
         setBackground(Style.BACKGROUND_COLOR);
         mainFrame = frame;
         this.northPanel = northPanel;
-        btnBack = new Button("Volver");
+        btnBack = new Button("←");
         setLayout(new BorderLayout());
-        centralPanel = new JPanel();
+        leftPanel = new JPanel();
+        rightPanel = new JPanel();
         southPanel = new JPanel();
-        centralPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        centralPanel.setPreferredSize(new Dimension(600, 500));
-        centralPanel.setBorder(BorderFactory.createEmptyBorder(40, 170, 0, 150));
+        leftPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        leftPanel.setPreferredSize(new Dimension(350, 500));
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(120, 0, 0, 0));
+        rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        rightPanel.setPreferredSize(new Dimension(850, 500));
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
         southPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         southPanel.setPreferredSize(new Dimension(500, 50));
-        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 0));
-        centralPanel.setBackground(Color.WHITE);
+        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 60, 20, 0));
+        leftPanel.setBackground(Color.WHITE);
+        rightPanel.setBackground(Color.WHITE);
         southPanel.setBackground(Color.WHITE);
         startComponents();
-        add(centralPanel, BorderLayout.CENTER);
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.EAST);
         add(southPanel, BorderLayout.SOUTH);
         southPanel.add(btnBack);
 

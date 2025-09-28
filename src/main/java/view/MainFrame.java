@@ -36,7 +36,7 @@ public final class MainFrame extends JFrame {
         this.mainController = mainController;
         startComponents();
         setTitle("Tutorias Comunitarias");
-        setSize(1280, 720);
+        setSize(1200, 720);
         setJMenuBar(menuBar);
         add(centralPanel, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,9 +51,7 @@ public final class MainFrame extends JFrame {
         btnHorarios = new Button("Horarios");
         btnMaterias = new Button("Materias");
         btnTutorias = new Button("Tutorias");
-
         mainPanel = new MainPanel();
-
         northPanel = new NorthPanel();
 
         centralPanel = new JPanel();
@@ -74,11 +72,11 @@ public final class MainFrame extends JFrame {
         northPanel.add(btnMaterias);
         northPanel.add(btnTutorias);
 
-        btnEstudiantes.setPreferredSize(new Dimension(170, 40));
-        btnTutores.setPreferredSize(new Dimension(170, 40));
-        btnHorarios.setPreferredSize(new Dimension(170, 40));
-        btnMaterias.setPreferredSize(new Dimension(170, 40));
-        btnTutorias.setPreferredSize(new Dimension(170, 40));
+        btnEstudiantes.setPreferredSize(new Dimension(160, 40));
+        btnTutores.setPreferredSize(new Dimension(160, 40));
+        btnHorarios.setPreferredSize(new Dimension(160, 40));
+        btnMaterias.setPreferredSize(new Dimension(160, 40));
+        btnTutorias.setPreferredSize(new Dimension(160, 40));
         btnEstudiantes.addActionListener(e -> showPanel(estudiantePanel));
         btnEstudiantes.addActionListener(e -> {
             btnInUse = btnEstudiantes;
@@ -104,7 +102,6 @@ public final class MainFrame extends JFrame {
             btnInUse = btnTutorias;
             northPanel.setInUseButton(btnInUse);
         });
-
     }
 
     private void showPanel(JPanel nuevoPanel) {

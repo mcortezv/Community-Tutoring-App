@@ -8,6 +8,7 @@ import view.formsDialog.EstudianteFormDialog;
 import view.MainFrame;
 import view.styles.Panel;
 import view.styles.Button;
+import utils.TableModel;
 import java.awt.Dimension;
 
 /**
@@ -20,11 +21,13 @@ public class EstudiantePanel extends Panel {
     private Button btnUpdateEstudiante;
     private Button btnDeleteEstudiante;
     private Button btnReadAllEstudiantes;
+    private TablePanel tablePanel;
     private MainController controller;
 
     public EstudiantePanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
         this.controller = controller;
+        tablePanel.setFullModel(TableModel.listToTableModelEstudiantes(controller.getEstudianteController().readAll()));
     }
 
     @Override
@@ -34,7 +37,7 @@ public class EstudiantePanel extends Panel {
         btnUpdateEstudiante = new Button("Actualizar Estudiante");
         btnDeleteEstudiante = new Button("Eliminar Estudiante");
         btnReadAllEstudiantes = new Button("Listar Estudiantes");
-
+        tablePanel = new TablePanel();
         btnCreateEstudiante.setPreferredSize(new Dimension(230, 40));
         btnReadEstudiante.setPreferredSize(new Dimension(230, 40));
         btnUpdateEstudiante.setPreferredSize(new Dimension(230, 40));
@@ -56,10 +59,11 @@ public class EstudiantePanel extends Panel {
             new EstudianteFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
-        centralPanel.add(btnCreateEstudiante);
-        centralPanel.add(btnReadEstudiante);
-        centralPanel.add(btnUpdateEstudiante);
-        centralPanel.add(btnDeleteEstudiante);
-        centralPanel.add(btnReadAllEstudiantes);
+        leftPanel.add(btnCreateEstudiante);
+        leftPanel.add(btnReadEstudiante);
+        leftPanel.add(btnUpdateEstudiante);
+        leftPanel.add(btnDeleteEstudiante);
+        leftPanel.add(btnReadAllEstudiantes);
+        rightPanel.add(tablePanel);
     }
 }
