@@ -51,10 +51,6 @@ public final class HorarioFormDialog extends Dialog {
                 setTitle("Eliminar Horario");
                 deleteHorario();
             }
-            case 4 -> {
-                setTitle("Listar Horarios");
-                readAllHorarios();
-            }
             default -> {}
         }
     }
@@ -91,11 +87,13 @@ public final class HorarioFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!controller.getHorarioController().create(diaField.getText().trim(),
+            if (controller.getHorarioController().create(diaField.getText().trim(),
                     horaInicioField.getText().trim(),
                     horaFinField.getText().trim(),
                     controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {
                 JOptionPane.showMessageDialog(centerPanel, "Horario agregado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Horario no pudo agregarse");
             }
             dispose();
         });
@@ -127,6 +125,8 @@ public final class HorarioFormDialog extends Dialog {
             Horario horario = controller.getHorarioController().read(Integer.parseInt(idField.getText().trim()));
             if (horario != null) {
                 JOptionPane.showMessageDialog(centerPanel, horario.toString());
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "Horario no encontrado");
             }
             dispose();
         });
@@ -175,12 +175,14 @@ public final class HorarioFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (!controller.getHorarioController().update(Integer.parseInt(idField.getText().trim()),
+            if (controller.getHorarioController().update(Integer.parseInt(idField.getText().trim()),
                     diaField.getText().trim(),
                     horaInicioField.getText().trim(),
                     horaFinField.getText().trim(),
                     controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {
                 JOptionPane.showMessageDialog(centerPanel, "Horario actualizado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Horario no se pudo actualizar");
             }
             dispose();
         });
@@ -209,8 +211,10 @@ public final class HorarioFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (!controller.getHorarioController().delete(Integer.parseInt(idField.getText().trim()))) {
+            if (controller.getHorarioController().delete(Integer.parseInt(idField.getText().trim()))) {
                 JOptionPane.showMessageDialog(centerPanel, "Horario eliminado con exito");
+            } else {
+                JOptionPane.showMessageDialog(centerPanel, "El Horario no se pudo eliminar");
             }
             dispose();
         });
@@ -219,9 +223,5 @@ public final class HorarioFormDialog extends Dialog {
         southPanel.add(btnDelete);
         add(centerPanel, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
-    }
-
-    public void readAllHorarios() {
-        controller.getHorarioController().readAll();
     }
 }

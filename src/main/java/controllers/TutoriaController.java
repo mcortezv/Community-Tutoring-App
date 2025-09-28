@@ -5,6 +5,7 @@
 package controllers;
 import DAO.TutoriaDAO;
 import models.*;
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -23,19 +24,19 @@ public class TutoriaController {
 
     public boolean create(String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia){
         if (fecha == null  || hora == null || estado == null || tutor == null || estudiante == null || materia == null) {
-            System.out.println("Ningun dato no puede estar vacio");
+            JOptionPane.showMessageDialog(null, "Ningun dato no puede estar vacio");
             return false;
         }
         if (!Pattern.matches("^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", fecha)){
-            System.out.println("La fecha no cumple con el formato");
+            JOptionPane.showMessageDialog(null, "La fecha no cumple con el formato");
             return false;
         }
         if (!Pattern.matches("^([01]\\d|2[0-3]):[0-5]\\d$", hora)){
-            System.out.println("La hora no cumple con el formato");
+            JOptionPane.showMessageDialog(null, "La hora no cumple con el formato");
             return false;
         }
         if (!Arrays.asList(estados).contains(estado)) {
-            System.out.println("Estado inexistente (Programada, En curso, Completada)");
+            JOptionPane.showMessageDialog(null, "Estado inexistente (Programada, En curso, Completada)");
             return false;
         }
         Tutoria tutoria = new Tutoria(fecha, hora, estado, tutor, estudiante, materia);
@@ -44,33 +45,33 @@ public class TutoriaController {
 
     public Tutoria read(int idTutoria){
         if (idTutoria <= 0){
-            System.out.println("El ID no puede ser negativa");
+            JOptionPane.showMessageDialog(null, "El ID no puede ser negativa");
         }
         return tutoriaDAO.read(idTutoria);
     }
 
     public boolean update(int idTutoria, String fecha, String hora, String estado, Tutor tutor, Estudiante estudiante, Materia materia){
         if (idTutoria <= 0){
-            System.out.println("El ID no puede ser negativa");
+            JOptionPane.showMessageDialog(null, "El ID no puede ser negativa");
         }
         if (fecha == null  || hora == null || estado == null || tutor == null || estudiante == null || materia == null) {
-            System.out.println("Ningun dato no puede estar vacio");
+            JOptionPane.showMessageDialog(null, "Ningun dato no puede estar vacio");
             return false;
         }
         if (tutoriaDAO.read(idTutoria) == null) {
-            System.out.println("El estudiante no existe");
+            JOptionPane.showMessageDialog(null, "El estudiante no existe");
             return false;
         }
         if (!Pattern.matches("^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", fecha)){
-            System.out.println("La fecha no cumple con el formato");
+            JOptionPane.showMessageDialog(null, "La fecha no cumple con el formato");
             return false;
         }
         if (!Pattern.matches("^([01]\\d|2[0-3]):[0-5]\\d$", hora)){
-            System.out.println("La hora no cumple con el formato");
+            JOptionPane.showMessageDialog(null, "La hora no cumple con el formato");
             return false;
         }
         if (!Arrays.asList(estados).contains(estado)) {
-            System.out.println("Estado inexistente (Programada, En curso, Completada)");
+            JOptionPane.showMessageDialog(null, "Estado inexistente (Programada, En curso, Completada)");
             return false;
         }
         Tutoria tutoria = new Tutoria(idTutoria, fecha, hora, estado, tutor, estudiante, materia);
@@ -79,10 +80,10 @@ public class TutoriaController {
 
     public boolean delete(int idTutoria){
         if (idTutoria <= 0){
-            System.out.println("El ID no puede ser negativa");
+            JOptionPane.showMessageDialog(null, "El ID no puede ser negativa");
         }
         if (tutoriaDAO.read(idTutoria) == null) {
-            System.out.println("El estudiante no existe");
+            JOptionPane.showMessageDialog(null, "El estudiante no existe");
             return false;
         }
         return  tutoriaDAO.delete(idTutoria);

@@ -20,7 +20,6 @@ public class HorarioPanel extends Panel {
     private Button btnReadHorario;
     private Button btnUpdateHorario;
     private Button btnDeleteHorario;
-    private Button btnReadAllHorarios;
     private TablePanel tablePanel;
     private MainController controller;
 
@@ -36,16 +35,15 @@ public class HorarioPanel extends Panel {
         btnReadHorario =  new Button("Busar Horario");
         btnUpdateHorario =  new Button("Actualizar Horario");
         btnDeleteHorario =  new Button("Eliminar Horario");
-        btnReadAllHorarios =  new Button("Listar Horarios");
         tablePanel = new TablePanel();
         btnCreateHorario.setPreferredSize(new Dimension(230, 40));
         btnReadHorario.setPreferredSize(new Dimension(230, 40));
         btnUpdateHorario.setPreferredSize(new Dimension(230, 40));
         btnDeleteHorario.setPreferredSize(new Dimension(230, 40));
-        btnReadAllHorarios.setPreferredSize(new Dimension(230, 40));
 
         btnCreateHorario.addActionListener(e -> {
             new HorarioFormDialog(mainFrame, controller, 0).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
         });
 
         btnReadHorario.addActionListener(e -> {
@@ -54,21 +52,18 @@ public class HorarioPanel extends Panel {
 
         btnUpdateHorario.addActionListener(e -> {
             new HorarioFormDialog(mainFrame, controller, 2).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
         });
 
         btnDeleteHorario.addActionListener(e -> {
             new HorarioFormDialog(mainFrame, controller, 3).setVisible(true);
-        });
-
-        btnReadAllHorarios.addActionListener(e -> {
-            new HorarioFormDialog(mainFrame, controller, 4).setVisible(true);
+            tablePanel.setFullModel(TableModel.listToTableModelHorarios(controller.getHorarioController().readAll()));
         });
 
         leftPanel.add(btnCreateHorario);
         leftPanel.add(btnReadHorario);
         leftPanel.add(btnUpdateHorario);
         leftPanel.add(btnDeleteHorario);
-        leftPanel.add(btnReadAllHorarios);
         rightPanel.add(tablePanel);
     }
 }
