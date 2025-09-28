@@ -31,7 +31,7 @@ public class CommunityTutoringApp {
         System.out.println("--- ESTUDIANTES ---");
         estudianteController.create("Manuel Cortez", "Secundaria", 15, "5512345678", "Escuela Uno");
         estudianteController.create("Sebastian Escalante", "Preparatoria", 17, "5598765432", "Escuela Dos");
-        List<Estudiante> estudiantes = estudianteController.readAllEstudiantes();
+        List<Estudiante> estudiantes = estudianteController.readAll();
         for (Estudiante estudiante : estudiantes){
             System.out.println(estudiante);
         }
@@ -42,7 +42,7 @@ public class CommunityTutoringApp {
 
         System.out.println("\nEliminar estudiante con ID = 2");
         estudianteController.delete(2);
-        estudiantes = estudianteController.readAllEstudiantes();
+        estudiantes = estudianteController.readAll();
         for (Estudiante estudiante : estudiantes){
             System.out.println(estudiante);
         }

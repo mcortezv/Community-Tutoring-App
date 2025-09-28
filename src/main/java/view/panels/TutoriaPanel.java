@@ -4,6 +4,7 @@
  */
 package view.panels;
 import controllers.MainController;
+import utils.TableModel;
 import view.formsDialog.TutoriaFormDialog;
 import view.MainFrame;
 import view.styles.Panel;
@@ -20,11 +21,13 @@ public class TutoriaPanel extends Panel {
     private Button btnUpdateTutoria;
     private Button btnDeleteTutoria;
     private Button btnReadAllTutorias;
+    private TablePanel tablePanel;
     private MainController controller;
 
     public TutoriaPanel(MainFrame frame, NorthPanel northPanel, MainController controller) {
         super(frame, northPanel);
         this.controller = controller;
+        tablePanel.setFullModel(TableModel.listToTableModelTutoria(controller.getTutoriaController().readAll()));
     }
 
     @Override
@@ -34,9 +37,7 @@ public class TutoriaPanel extends Panel {
         btnUpdateTutoria = new Button("Actualizar Tutoria");
         btnDeleteTutoria = new Button("Eliminar Tutoria");
         btnReadAllTutorias = new Button("Listar Tutorias");
-
-
-        //Buttons
+        tablePanel = new TablePanel();
         btnCreateTutoria.setPreferredSize(new Dimension(230, 40));
         btnReadTutoria.setPreferredSize(new Dimension(230, 40));
         btnUpdateTutoria.setPreferredSize(new Dimension(230, 40));
@@ -64,10 +65,11 @@ public class TutoriaPanel extends Panel {
             new TutoriaFormDialog(mainFrame, controller, 4).setVisible(true);
         });
 
-        centralPanel.add(btnCreateTutoria);
-        centralPanel.add(btnReadTutoria);
-        centralPanel.add(btnUpdateTutoria);
-        centralPanel.add(btnDeleteTutoria);
-        centralPanel.add(btnReadAllTutorias);
+        leftPanel.add(btnCreateTutoria);
+        leftPanel.add(btnReadTutoria);
+        leftPanel.add(btnUpdateTutoria);
+        leftPanel.add(btnDeleteTutoria);
+        leftPanel.add(btnReadAllTutorias);
+        rightPanel.add(tablePanel);
     }
 }

@@ -243,6 +243,6 @@ public final class EstudianteFormDialog extends Dialog {
     }
 
     public void readAllEstudiantes() {
-        controller.readAllEstudiantes();
+        controller.readAll();
     }
 }

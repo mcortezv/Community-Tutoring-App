@@ -81,7 +81,7 @@ public class EstudianteController {
         return estudianteDAO.delete(idEstudiante);
     }
 
-    public List<Estudiante> readAllEstudiantes(){
+    public List<Estudiante> readAll(){
         return estudianteDAO.readAll();
     }
 }

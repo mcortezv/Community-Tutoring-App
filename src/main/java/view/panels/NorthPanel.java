@@ -4,11 +4,9 @@
  */
 package view.panels;
 import view.styles.*;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import view.styles.Button;
+
+import java.awt.*;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -29,18 +27,18 @@ public class NorthPanel extends JPanel {
         super.paintComponent(g);
         int width = getWidth();
         int height = getHeight();
-
-        g.setColor(Style.BACKGROUND_COLOR);
-        g.fillRect(0, 0, width, height);
         Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setColor(Style.BACKGROUND_COLOR);
+        g2.fillRect(0, 0, width, height);
 
         if (btnInUse != null) {
             Rectangle r = btnInUse.getBounds();
             g2.setColor(Color.WHITE);
-            g2.fillRoundRect(r.x - 5, r.y - 5, r.width + 10, r.height + 10, 15, 15);
+            g2.fillRoundRect(r.x - 5, r.y - 5, r.width + 10, r.height + 10, 20, 20);
         } else {
             g2.setColor(Style.PANEL_COLOR);
-
         }
     }
 
