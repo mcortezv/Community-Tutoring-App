@@ -20,11 +20,6 @@ import java.util.regex.Pattern;
  */
 public class HorarioController {
     private final IHorarioDAO horarioDAO;
-<<<<<<< HEAD
-
-=======
-   
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
     private static final List<String> DIAS_SEMANA = Arrays.asList("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo");
 
     public HorarioController() {
@@ -37,52 +32,30 @@ public class HorarioController {
             System.out.println("Ningún dato puede ser nulo.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que las cadenas no estén vacías
         if (dia.trim().isEmpty() || horaInicio.trim().isEmpty() || horaFin.trim().isEmpty()) {
             System.out.println("Los campos de día y hora no pueden estar vacíos.");
             return false;
         }
 
-<<<<<<< HEAD
-        // Valida que el día sea válido
-=======
-        // Valida que el día sea válido 
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         if (DIAS_SEMANA.stream().noneMatch(d -> d.equalsIgnoreCase(dia))) {
             System.out.println("El día no corresponde a ningún día de la semana o no cumple el formato (Lunes, Martes, etc).");
             return false;
         }
 
-<<<<<<< HEAD
-        // Valida el formato HH:mm
-=======
-        // Valida el formato HH:mm 
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         String formatoHora = "^([01]\\d|2[0-3]):[0-5]\\d$";
         if (!Pattern.matches(formatoHora, horaInicio) || !Pattern.matches(formatoHora, horaFin)) {
             System.out.println("La hora de inicio o fin no cumple con el formato de 24 horas (HH:mm).");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que la hora de inicio sea antes que la hora de fin
         if (LocalTime.parse(horaInicio).isAfter(LocalTime.parse(horaFin))) {
             System.out.println("La hora de inicio no puede ser posterior a la hora de fin.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que la hora de inicio y fin no sean la misma
         if (horaInicio.equals(horaFin)) {
             System.out.println("La hora de inicio y la hora de fin no pueden ser iguales.");
@@ -113,42 +86,24 @@ public class HorarioController {
             System.out.println("Ningún dato puede ser nulo.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que las cadenas no estén vacías
         if (dia.trim().isEmpty() || horaInicio.trim().isEmpty() || horaFin.trim().isEmpty()) {
             System.out.println("Los campos de día y hora no pueden estar vacíos.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         if (horarioDAO.read(idHorario) == null) {
             System.out.println("El horario que intenta actualizar no existe.");
             return false;
         }
-<<<<<<< HEAD
 
-        // Valida el formato HH:mm
-=======
-        
-        // Valida el formato HH:mm 
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         String formatoHora = "^([01]\\d|2[0-3]):[0-5]\\d$";
         if (!Pattern.matches(formatoHora, horaInicio) || !Pattern.matches(formatoHora, horaFin)) {
             System.out.println("La hora de inicio o fin no cumple con el formato de 24 horas (HH:mm).");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que la hora de inicio sea antes que la hora de fin
         if (LocalTime.parse(horaInicio).isAfter(LocalTime.parse(horaFin))) {
             System.out.println("La hora de inicio no puede ser posterior a la hora de fin.");

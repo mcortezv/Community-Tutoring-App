@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controllers;
-
 import DAO.TutorDAO;
 import models.Tutor;
 import java.util.List;
@@ -15,11 +14,6 @@ import java.util.regex.Pattern;
  * @author Cortez, Manuel (Modificado por Angel);
  */
 public class TutorController {
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
     private final TutorDAO tutorDAO;
 
     public TutorController() {
@@ -50,11 +44,7 @@ public class TutorController {
             System.out.println("El teléfono debe contener exactamente 10 dígitos numéricos.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida un formato de correo electrónico estándar.
         if (!Pattern.matches("^[\\w._%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", correo)) {
             System.out.println("El formato del correo electrónico no es válido.");
@@ -96,11 +86,6 @@ public class TutorController {
             System.out.println("Ningún campo puede ser nulo.");
             return false;
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         // Valida que las cadenas no estén vacías.
         if (nombre.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || especialidad.trim().isEmpty()) {
             System.out.println("Ningún campo puede estar vacío.");
@@ -122,11 +107,7 @@ public class TutorController {
             System.out.println("El formato del correo electrónico no es válido.");
             return false;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 684f6f233a37c349e8807ee0a37d0e9cac9eb912
         if (especialidad.trim().length() < 5 || especialidad.trim().length() > 100) {
             System.out.println("La especialidad debe tener entre 5 y 100 caracteres.");
             return false;
