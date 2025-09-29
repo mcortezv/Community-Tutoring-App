@@ -4,6 +4,7 @@
  */
 package controllers;
 import DAO.TutorDAO;
+import interfaces.ITutorDAO;
 import models.Tutor;
 import javax.swing.*;
 import java.util.List;
@@ -14,123 +15,172 @@ import java.util.regex.Pattern;
  * @author Angel Beltran;
  * @author Cortez, Manuel (Modificado por Angel);
  */
-public class TutorController {
-    private final TutorDAO tutorDAO;
 
+/**
+ * Esta clase es el "cerebro" que maneja todo lo relacionado con los Tutores.
+ * Funciona como un intermediario entre la vista (lo que el usuario ve) y
+ * los datos (el DAO). Su trabajo principal es aplicar las reglas del negocio,
+ * como validar que los datos sean correctos antes de mandarlos a guardar.
+ */
+public class TutorController {
+    
+    /**
+     * Esta variable guardara nuestro objeto de acceso a datos (DAO).
+     * La declaramos como la INTERFAZ (ITutorDAO) en lugar de la clase real (TutorDAO).
+     * Esto es un truco genial que nos permite usar un DAO real en la aplicacion
+     * y un DAO falso en las pruebas, haciendo el codigo mas flexible y profesional.
+     */
+    private final ITutorDAO tutorDAO;
+
+    /**
+     * Este es el constructor que usa la aplicacion real.
+     * Cuando la vista crea un TutorController, este constructor se encarga
+     * de crear el DAO real que se conecta a la base de datos.
+     */
     public TutorController() {
-        tutorDAO = new TutorDAO();
+        this.tutorDAO = new TutorDAO();
     }
 
+    /**
+     * Este metodo se encarga de crear un nuevo tutor.
+     * Recibe los datos desde la vista, los revisa uno por uno (validacion),
+     * y si todo esta en orden, crea un objeto Tutor y se lo pasa al DAO para que lo guarde.
+     * @return Devuelve 'true' si todo salio bien, o 'false' si algun dato era incorrecto.
+     */
     public boolean create(String nombre, String telefono, String correo, String especialidad) {
-        // Valida que los objetos no sean nulos
+        // --- SECCION DE VALIDACIONES ---
+        // Primero, nos aseguramos de que ningun dato venga nulo (vacio).
         if (nombre == null || telefono == null || correo == null || especialidad == null) {
-            JOptionPane.showMessageDialog(null, "Ningún campo puede ser nulo.");
-            return false;
+            return false; // Si algo es nulo, detenemos todo y devolvemos false.
         }
-
-        // Valida que las cadenas no estén vacías o contengan solo espacios en blanco.
+        
+        // Luego, revisamos que los textos no esten vacios (puros espacios en blanco).
         if (nombre.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || especialidad.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ningún campo puede estar vacío.");
             return false;
         }
 
-        // Valida que el nombre solo contenga letras y espacios.
-        if (!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", nombre)) {
-            JOptionPane.showMessageDialog(null, "El nombre solo puede contener letras y espacios.");
+        // Usamos "expresiones regulares" para aplicar reglas mas complejas.
+        // Esta regla dice: el nombre solo puede contener letras (mayusculas o minusculas) y espacios.
+        if (!Pattern.matches("^[a-zA-Z\\s]+$", nombre)) {
             return false;
         }
-
-        // Valida que el teléfono contenga 10 dígitos numéricos.
+        
+        // Esta regla dice: el telefono debe contener exactamente 10 digitos numericos.
         if (!Pattern.matches("\\d{10}", telefono)) {
-            JOptionPane.showMessageDialog(null, "El teléfono debe contener exactamente 10 dígitos numéricos.");
             return false;
         }
-
-        // Valida un formato de correo electrónico estándar.
+        
+        // Esta regla verifica que el correo tenga un formato valido (ej. usuario@dominio.com).
         if (!Pattern.matches("^[\\w._%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", correo)) {
-            JOptionPane.showMessageDialog(null, "El formato del correo electrónico no es válido.");
             return false;
         }
-
-        // Valida una longitud razonable para la especialidad.
+        
+        // Finalmente, una validacion de longitud para la especialidad.
         if (especialidad.trim().length() < 5 || especialidad.trim().length() > 100) {
-            JOptionPane.showMessageDialog(null, "La especialidad debe tener entre 5 y 100 caracteres.");
             return false;
         }
+        
+        // --- FIN DE VALIDACIONES ---
 
+        // Si pasamos todas las validaciones, creamos el objeto Tutor.
         Tutor tutor = new Tutor(nombre, telefono, correo, especialidad);
+        
+        // Le pasamos el nuevo objeto al DAO para que lo guarde en la base de datos.
         return tutorDAO.create(tutor);
     }
 
+    /**
+     * Busca un tutor en la base de datos usando su ID.
+     * @param idTutor El ID del tutor que queremos encontrar.
+     * @return Devuelve el objeto Tutor si lo encuentra, o 'null' si no existe o el ID es invalido.
+     */
     public Tutor read(int idTutor) {
+        // Validacion rapida: no tiene sentido buscar un ID de 0 o negativo.
         if (idTutor <= 0) {
-            JOptionPane.showMessageDialog(null, "El ID del tutor no puede ser negativo o cero.");
-            return null; // Evita una consulta innecesaria a la BD.
+            return null; 
         }
+        // Le pedimos al DAO que busque al tutor.
         return tutorDAO.read(idTutor);
     }
 
+    /**
+     * Actualiza los datos de un tutor que ya existe.
+     * Primero se asegura de que el tutor exista y luego aplica las mismas
+     * validaciones que el metodo 'create'.
+     * @return Devuelve 'true' si la actualizacion fue exitosa, o 'false' en caso contrario.
+     */
     public boolean update(int idTutor, String nombre, String telefono, String correo, String especialidad) {
-        // Valida el ID primero.
+        // Validamos el ID.
         if (idTutor <= 0) {
-            JOptionPane.showMessageDialog(null, "El ID del tutor no puede ser negativo o cero.");
             return false;
         }
-
+        
+        // ¡Importante! Verificamos que el tutor realmente exista antes de intentar actualizarlo.
         if (tutorDAO.read(idTutor) == null) {
-            JOptionPane.showMessageDialog(null, "El tutor que intenta actualizar no existe.");
             return false;
         }
 
-        // Valida que los demás campos no sean nulos.
+        // Reutilizamos exactamente las mismas validaciones del metodo 'create'.
         if (nombre == null || telefono == null || correo == null || especialidad == null) {
-            JOptionPane.showMessageDialog(null, "Ningún campo puede ser nulo.");
             return false;
         }
-        // Valida que las cadenas no estén vacías.
         if (nombre.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || especialidad.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ningún campo puede estar vacío.");
             return false;
         }
-
-        // Reutiliza las mismas validaciones del método create.
-        if (!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", nombre)) {
-            JOptionPane.showMessageDialog(null, "El nombre solo puede contener letras y espacios.");
+        if (!Pattern.matches("^[a-zA-Z\\s]+$", nombre)) {
             return false;
         }
-
         if (!Pattern.matches("\\d{10}", telefono)) {
-            JOptionPane.showMessageDialog(null, "El teléfono debe contener exactamente 10 dígitos numéricos.");
             return false;
         }
-
         if (!Pattern.matches("^[\\w._%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", correo)) {
-            JOptionPane.showMessageDialog(null, "El formato del correo electrónico no es válido.");
             return false;
         }
-
         if (especialidad.trim().length() < 5 || especialidad.trim().length() > 100) {
-            JOptionPane.showMessageDialog(null, "La especialidad debe tener entre 5 y 100 caracteres.");
             return false;
         }
-
+        
+        // Si todo es correcto, creamos el objeto Tutor (esta vez con el ID)
         Tutor tutor = new Tutor(idTutor, nombre, telefono, correo, especialidad);
+        
+        // y se lo pasamos al DAO para que lo actualice.
         return tutorDAO.update(tutor);
     }
 
+    /**
+     * Elimina un tutor de la base de datos.
+     * @param idTutor El ID del tutor a eliminar.
+     * @return Devuelve 'true' si se elimino correctamente, o 'false' si no.
+     */
     public boolean delete(int idTutor) {
+        // Validamos el ID.
         if (idTutor <= 0) {
-            JOptionPane.showMessageDialog(null, "El ID del tutor no puede ser negativo o cero.");
             return false;
         }
+        
+        // Verificamos que el tutor exista antes de intentar borrarlo.
         if (tutorDAO.read(idTutor) == null) {
-            JOptionPane.showMessageDialog(null, "El tutor que intenta eliminar no existe.");
             return false;
         }
+        
+        // Si existe, le pedimos al DAO que lo elimine.
         return tutorDAO.delete(idTutor);
     }
 
+    /**
+     * Pide al DAO la lista completa de todos los tutores.
+     * @return Una lista de objetos Tutor.
+     */
     public List<Tutor> readAll() {
         return tutorDAO.readAll();
+    }
+    
+    /**
+     * Este es un constructor especial solo para nuestras pruebas.
+     * Nos permite "inyectar" o pasarle un DAO falso desde afuera.
+     * Asi podemos probar la logica del controlador sin tocar la base de datos.
+     */
+    public TutorController(ITutorDAO tutorDAO) {
+        this.tutorDAO = tutorDAO;
     }
 }

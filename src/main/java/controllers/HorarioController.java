@@ -129,4 +129,9 @@ public class HorarioController {
     public List<Horario> readAll() {
         return horarioDAO.readAll();
     }
+    
+    //CONSTRUCTOR PARA LAS PRUEBAS
+    public HorarioController(IHorarioDAO horarioDAO) {
+        this.horarioDAO = horarioDAO;
+    }
 }
