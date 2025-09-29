@@ -58,60 +58,64 @@ public final class TutoriaFormDialog extends Dialog {
     }
 
     public void createTutoria() {
-        setSize(660, 560);
+        setSize(500, 560);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel fechaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        fechaPanel.add(new JLabel("Fecha:        "));
+        JPanel fechaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        fechaPanel.add(new JLabel("Fecha:                      "));
         fechaField = new TextField(20);
         fechaPanel.add(fechaField);
         fechaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel horaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        horaPanel.add(new JLabel("Hora:               "));
+        JPanel horaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        horaPanel.add(new JLabel("Hora:                        "));
         horaField = new TextField(20);
         horaPanel.add(horaField);
         horaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        estadoPanel.add(new JLabel("Estado:                                "));
+        JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        estadoPanel.add(new JLabel("Estado:                    "));
         estadoField = new TextField(20);
         estadoPanel.add(estadoField);
         estadoPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idTutorPanel.add(new JLabel("ID del Tutor:                         "));
+        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idTutorPanel.add(new JLabel("ID del Tutor:          "));
         idTutorField = new TextField(20);
         idTutorPanel.add(idTutorField);
         idTutorPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idEstudiantePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idEstudiantePanel.add(new JLabel("ID del Estudiante:                         "));
+        JPanel idEstudiantePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idEstudiantePanel.add(new JLabel("ID del Estudiante:   "));
         idEstudianteField = new TextField(20);
         idEstudiantePanel.add(idEstudianteField);
         idEstudiantePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idMateriaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idMateriaPanel.add(new JLabel("ID de la Materia"));
+        JPanel idMateriaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idMateriaPanel.add(new JLabel("ID de la Materia      "));
         idMateriaField = new TextField(20);
         idMateriaPanel.add(idMateriaField);
         idMateriaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (controller.getTutoriaController().create(fechaField.getText().trim(),
-                    horaField.getText().trim(),
-                    estadoField.getText().trim(),
-                    controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
-                    controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
-                    controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
-                JOptionPane.showMessageDialog(centerPanel, "Tutoria agregada con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se ha podido agregar");
+            try {
+                if (controller.getTutoriaController().create(fechaField.getText().trim(),
+                        horaField.getText().trim(),
+                        estadoField.getText().trim(),
+                        controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
+                        controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
+                        controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Tutoria agregada con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se ha podido agregar");
+                }
+                dispose();
+            }catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(Box.createVerticalStrut(10));
@@ -132,7 +136,7 @@ public final class TutoriaFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("ID de la Tutoria:   "));
         idField = new TextField(12);
         idPanel.add(idField);
@@ -141,13 +145,17 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnSearch = new Button("Buscar");
         btnSearch.addActionListener(e -> {
-            Tutoria tutoria = controller.getTutoriaController().read(Integer.parseInt(idField.getText().trim()));
-            if (tutoria != null) {
-                JOptionPane.showMessageDialog(centerPanel, tutoria.toString());
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "Tutoria no encontrada");
+            try {
+                Tutoria tutoria = controller.getTutoriaController().read(Integer.parseInt(idField.getText().trim()));
+                if (tutoria != null) {
+                    JOptionPane.showMessageDialog(centerPanel, tutoria.toString());
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "Tutoria no encontrada");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
@@ -157,67 +165,71 @@ public final class TutoriaFormDialog extends Dialog {
     }
 
     public void updateTutoria() {
-        setSize(660, 600);
+        setSize(500, 600);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idPanel.add(new JLabel("ID de la Tutoria:   "));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idPanel.add(new JLabel("ID de la Tutoria:     "));
         idField = new TextField(20);
         idPanel.add(idField);
         idPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel fechaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        fechaPanel.add(new JLabel("Fecha:        "));
+        JPanel fechaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        fechaPanel.add(new JLabel("Fecha:                      "));
         fechaField = new TextField(20);
         fechaPanel.add(fechaField);
         fechaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel horaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        horaPanel.add(new JLabel("Hora:               "));
+        JPanel horaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        horaPanel.add(new JLabel("Hora:                        "));
         horaField = new TextField(20);
         horaPanel.add(horaField);
         horaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        estadoPanel.add(new JLabel("Estado:                                "));
+        JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        estadoPanel.add(new JLabel("Estado:                    "));
         estadoField = new TextField(20);
         estadoPanel.add(estadoField);
         estadoPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idTutorPanel.add(new JLabel("ID del Tutor:                         "));
+        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idTutorPanel.add(new JLabel("ID del Tutor:          "));
         idTutorField = new TextField(20);
         idTutorPanel.add(idTutorField);
         idTutorPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idEstudiantePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idEstudiantePanel.add(new JLabel("ID del Estudiante:                         "));
+        JPanel idEstudiantePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idEstudiantePanel.add(new JLabel("ID del Estudiante:   "));
         idEstudianteField = new TextField(20);
         idEstudiantePanel.add(idEstudianteField);
         idEstudiantePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idMateriaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idMateriaPanel.add(new JLabel("ID de la Materia"));
+        JPanel idMateriaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idMateriaPanel.add(new JLabel("ID de la Materia      "));
         idMateriaField = new TextField(20);
         idMateriaPanel.add(idMateriaField);
         idMateriaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (controller.getTutoriaController().update(Integer.parseInt(idField.getText().trim()),
-                    fechaField.getText().trim(),
-                    horaField.getText().trim(),
-                    estadoField.getText().trim(),
-                    controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
-                    controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
-                    controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
-                JOptionPane.showMessageDialog(centerPanel, "Tutoria actualizada con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se pudo actualizar");
+            try {
+                if (controller.getTutoriaController().update(Integer.parseInt(idField.getText().trim()),
+                        fechaField.getText().trim(),
+                        horaField.getText().trim(),
+                        estadoField.getText().trim(),
+                        controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
+                        controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
+                        controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Tutoria actualizada con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se pudo actualizar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
@@ -239,7 +251,7 @@ public final class TutoriaFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("ID de la Tutoria:   "));
         idField = new TextField(12);
         idPanel.add(idField);
@@ -248,12 +260,16 @@ public final class TutoriaFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (controller.getTutoriaController().delete(Integer.parseInt(idField.getText().trim()))) {
-                JOptionPane.showMessageDialog(centerPanel, "Tutoria eliminada con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se pudo eliminar");
+            try {
+                if (controller.getTutoriaController().delete(Integer.parseInt(idField.getText().trim()))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Tutoria eliminada con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "La Tutoria no se pudo eliminar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);

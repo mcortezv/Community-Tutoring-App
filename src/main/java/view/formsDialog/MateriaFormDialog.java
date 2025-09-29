@@ -56,39 +56,43 @@ public final class MateriaFormDialog extends Dialog {
     }
 
     public void createMateria() {
-        setSize(660, 400);
+        setSize(500, 400);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        nombrePanel.add(new JLabel("Nombre:        "));
+        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        nombrePanel.add(new JLabel("Nombre:          "));
         nombreField = new TextField(20);
         nombrePanel.add(nombreField);
         nombrePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel nivelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        nivelPanel.add(new JLabel("Nivel:               "));
+        JPanel nivelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        nivelPanel.add(new JLabel("Nivel:                "));
         nivelField = new TextField(20);
         nivelPanel.add(nivelField);
         nivelPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel descripcionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        descripcionPanel.add(new JLabel("Descripcion:                                "));
+        JPanel descripcionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        descripcionPanel.add(new JLabel("Descripcion:   "));
         descripcionField = new TextField(20);
         descripcionPanel.add(descripcionField);
         descripcionPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (controller.create(nombreField.getText().trim(),
-                    nivelField.getText().trim(),
-                    descripcionField.getText().trim())) {
-                JOptionPane.showMessageDialog(centerPanel, "Materia agregada con exito");
+            if (!nombreField.getText().trim().isBlank() || !nivelField.getText().trim().isBlank() || !descripcionField.getText().trim().isBlank()) {
+                if (controller.create(nombreField.getText().trim(),
+                        nivelField.getText().trim(),
+                        descripcionField.getText().trim())) {
+                    JOptionPane.showMessageDialog(centerPanel, "Materia agregada con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo agregar");
+                }
+                dispose();
             } else {
-                JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo agregar");
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(nombrePanel);
@@ -106,7 +110,7 @@ public final class MateriaFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("ID de la Materia:   "));
         idField = new TextField(12);
         idPanel.add(idField);
@@ -115,13 +119,17 @@ public final class MateriaFormDialog extends Dialog {
 
         Button btnSearch = new Button("Buscar");
         btnSearch.addActionListener(e -> {
-            Materia materia = controller.read(Integer.parseInt(idField.getText().trim()));
-            if (materia != null) {
-                JOptionPane.showMessageDialog(centerPanel, materia.toString());
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "Materia no encontrada");
+            try {
+                Materia materia = controller.read(Integer.parseInt(idField.getText().trim()));
+                if (materia != null) {
+                    JOptionPane.showMessageDialog(centerPanel, materia.toString());
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "Materia no encontrada");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
@@ -131,46 +139,50 @@ public final class MateriaFormDialog extends Dialog {
     }
 
     public void updateMateria() {
-        setSize(660, 460);
+        setSize(500, 460);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idPanel.add(new JLabel("Materia ID:   "));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idPanel.add(new JLabel("Materia ID:        "));
         idField = new TextField(20);
         idPanel.add(idField);
         idPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        nombrePanel.add(new JLabel("Nombre:        "));
+        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        nombrePanel.add(new JLabel("Nombre:           "));
         nombreField = new TextField(20);
         nombrePanel.add(nombreField);
         nombrePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel nivelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        nivelPanel.add(new JLabel("Nivel:               "));
+        JPanel nivelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        nivelPanel.add(new JLabel("Nivel:                "));
         nivelField = new TextField(20);
         nivelPanel.add(nivelField);
         nivelPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel descripcionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        descripcionPanel.add(new JLabel("Descripcion:                                "));
+        JPanel descripcionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        descripcionPanel.add(new JLabel("Descripcion:   "));
         descripcionField = new TextField(20);
         descripcionPanel.add(descripcionField);
         descripcionPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (controller.update(Integer.parseInt(idField.getText().trim()),
-                    nombreField.getText().trim(),
-                    nivelField.getText().trim(),
-                    descripcionField.getText().trim())) {
-                JOptionPane.showMessageDialog(centerPanel, "Materia actualizada con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo actualizar");
+            try {
+                if (controller.update(Integer.parseInt(idField.getText().trim()),
+                        nombreField.getText().trim(),
+                        nivelField.getText().trim(),
+                        descripcionField.getText().trim())) {
+                    JOptionPane.showMessageDialog(centerPanel, "Materia actualizada con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo actualizar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
@@ -189,7 +201,7 @@ public final class MateriaFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("ID de la Materia:   "));
         idField = new TextField(12);
         idPanel.add(idField);
@@ -198,12 +210,16 @@ public final class MateriaFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (controller.delete(Integer.parseInt(idField.getText().trim()))) {
-                JOptionPane.showMessageDialog(centerPanel, "Materia eliminada con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo eliminar");
+            try {
+                if (controller.delete(Integer.parseInt(idField.getText().trim()))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Materia eliminada con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "La Materia no se pudo eliminar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);

@@ -19,7 +19,7 @@ public class Table extends JTable {
 
     public Table() {
         setFillsViewportHeight(true);
-        setRowHeight(36);
+        setRowHeight(40);
         setShowGrid(false);
         setSelectionBackground(new Color(36, 110, 185));
         setSelectionForeground(Color.WHITE);
@@ -69,6 +69,10 @@ public class Table extends JTable {
         updatePage(1);
     }
 
+    public TableModel getFullModel() {
+        return fullModel;
+    }
+
     public void updatePage(int page) {
         if (fullModel == null) return;
 
@@ -98,6 +102,11 @@ public class Table extends JTable {
     public void nextPage() {
         int maxPage = (int) Math.ceil(fullModel.getRowCount() / (double) rowsPerPage);
         if (currentPage < maxPage) updatePage(currentPage + 1);
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
     }
 
     public void previousPage() {

@@ -17,6 +17,7 @@ public class TablePanel extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 30));
         setBackground(Color.WHITE);
         table = new Table();
+
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.white, 1, true));
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI());
@@ -44,7 +45,7 @@ public class TablePanel extends JPanel {
             updatePageLabel();
         });
 
-        setPreferredSize(new Dimension(800, 400));
+        setPreferredSize(new Dimension(800, 440));
     }
 
     public void setFullModel(TableModel model) {
@@ -52,17 +53,24 @@ public class TablePanel extends JPanel {
         updatePageLabel();
     }
 
+
     private void updatePageLabel() {
-        lblPage.setText("Pagina " + table.getCurrentPage());
+        if (table.getFullModel() == null) {
+            lblPage.setText("Pagina 0 de 0");
+            btnPrev.setEnabled(false);
+            btnNext.setEnabled(false);
+            return;
+        }
+
+        int totalPages = (int) Math.ceil(
+                table.getFullModel().getRowCount() / (double) table.getRowsPerPage()
+        );
+        lblPage.setText("Pagina " + table.getCurrentPage() + " de " + totalPages);
+
+        btnPrev.setEnabled(table.getCurrentPage() > 1);
+        btnNext.setEnabled(table.getCurrentPage() < totalPages);
     }
 
-    public Object getSelectedId() {
-        return table.getSelectedId();
-    }
-
-    public Table getTable() {
-        return table;
-    }
 
 
     private JButton createStyledButton(String text) {
