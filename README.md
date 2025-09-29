@@ -1,19 +1,22 @@
 # Community-Tutoring-App
 
-Aplicación diseñada para gestionar **tutorías comunitarias**, conectando a estudiantes con tutores de forma accesible y organizada. Este proyecto surge como parte de la materia **Bases de Datos Avanzadas** y busca reducir la brecha educativa, ofreciendo apoyo académico personalizado.
+La **Aplicación de Tutorías Comunitarias** es un sistema gestor de bases de 
+datos, desarrollado como proyecto para la materia de **Bases de Datos Avanzadas**. 
+Su finalidad es conectar de manera organizada y accesible a estudiantes que 
+requieren apoyo académico con tutores voluntarios de su comunidad. De esta 
+forma, el proyecto busca activamente reducir la brecha educativa y fomentar 
+oportunidades de aprendizaje personalizado. 
 
 ---
 
-## 🚀 Objetivo
-Facilitar la **asignación de tutorías** en comunidades, permitiendo:
-- Registro de tutores con especialidades y horarios.
-- Registro de estudiantes con datos escolares.
-- Catálogo de materias disponibles.
-- Gestión de sesiones de tutorías (programadas, en curso, completadas).
+## Objetivo
+Crear una plataforma centralizada y eficiente para la gestión integral del ciclo 
+de tutorías comunitarias, desde el registro de los participantes hasta la 
+programación y el seguimiento de las sesiones académicas.
 
 ---
 
-## 🛠️ Funcionalidades principales
+## Funcionalidades principales
 - **Registro de Tutores**: nombre, especialidad, teléfono, correo, disponibilidad.
 - **Registro de Estudiantes**: nombre, grado escolar, edad, escuela de procedencia y contacto.
 - **Gestión de Horarios**: cada tutor puede registrar distintos días y horas de disponibilidad.
@@ -22,7 +25,7 @@ Facilitar la **asignación de tutorías** en comunidades, permitiendo:
 
 ---
 
-## 🗂️ Modelo de Datos
+## Modelo de Datos
 El sistema contempla las siguientes entidades:
 - **Estudiante**
 - **Tutor**
@@ -36,7 +39,7 @@ Cada entidad se encuentra normalizada y relacionada para permitir consultas efic
 
 ---
 
-## 💾 Base de Datos
+## Base de Datos
 El proyecto se implementa en **MySQL**, con el siguiente script de creación:
 
 ```sql
@@ -94,24 +97,15 @@ CREATE TABLE Tutoria (
 
 ---
 
-## 🎨 Storyboard / Prototipo
+## Storyboard / Prototipo
 Puedes visualizar el prototipo de la aplicación en los siguientes enlaces:
 - [Diseño en Figma](https://www.figma.com/design/d0TvSYbRHQXQL63LMuxMsj/Community-Tutoring-App?node-id=1-3&m=dev&t=zaDrom7bGK3GjwUq-1)
 - [Diagrama en Draw.io](https://drive.google.com/file/d/1M9R7WKziW42o52w3bUgcu1iXSihM3AzH/view?usp=sharing)
 
 ---
 
-## 👥 Equipo de Desarrollo
-Proyecto realizado por el **Equipo #3** – Ingeniería en Software:
+## Equipo de Desarrollo
+Proyecto realizado por el **Equipo #3** - Ingeniería en Software:
 - José Alfredo Guzman Moreno
 - Manuel de Jesus Cortez Villa
 - Angel Gabriel Beltran Duarte
-
----
-
-## 📌 Estado del Proyecto
-- ✅ Modelo Entidad–Relación (MER)
-- ✅ Modelo Relacional
-- ✅ Script SQL de creación de base de datos
-- ✅ Storyboard y prototipo en Figma
-- 🔜 Desarrollo de la aplicación
