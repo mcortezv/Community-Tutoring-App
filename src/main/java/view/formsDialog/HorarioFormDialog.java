@@ -56,46 +56,50 @@ public final class HorarioFormDialog extends Dialog {
     }
 
     public void createHorario() {
-        setSize(660, 460);
+        setSize(500, 460);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel diaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        diaPanel.add(new JLabel("Dia:   "));
+        JPanel diaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        diaPanel.add(new JLabel("Dia:                       "));
         diaField = new TextField(20);
         diaPanel.add(diaField);
         diaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel horaInicioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        horaInicioPanel.add(new JLabel("Hora Inicio:        "));
+        JPanel horaInicioPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        horaInicioPanel.add(new JLabel("Hora Inicio:         "));
         horaInicioField = new TextField(20);
         horaInicioPanel.add(horaInicioField);
         horaInicioPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel horaFinPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        horaFinPanel.add(new JLabel("Hora Fin:               "));
+        JPanel horaFinPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        horaFinPanel.add(new JLabel("Hora Fin:              "));
         horaFinField = new TextField(20);
         horaFinPanel.add(horaFinField);
         horaFinPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idTutorPanel.add(new JLabel("Id Tutor:                                "));
+        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idTutorPanel.add(new JLabel("Id Tutor:                "));
         idTutorField = new TextField(20);
         idTutorPanel.add(idTutorField);
         idTutorPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (controller.getHorarioController().create(diaField.getText().trim(),
-                    horaInicioField.getText().trim(),
-                    horaFinField.getText().trim(),
-                    controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {
-                JOptionPane.showMessageDialog(centerPanel, "Horario agregado con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "El Horario no pudo agregarse");
+            try {
+                if (controller.getHorarioController().create(diaField.getText().trim(),
+                        horaInicioField.getText().trim(),
+                        horaFinField.getText().trim(),
+                        controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Horario agregado con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "El Horario no pudo agregarse");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(diaPanel);
@@ -114,7 +118,7 @@ public final class HorarioFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("Horario ID:   "));
         idField = new TextField(20);
         idPanel.add(idField);
@@ -122,13 +126,17 @@ public final class HorarioFormDialog extends Dialog {
 
         Button btnSearch = new Button("Buscar");
         btnSearch.addActionListener(e -> {
-            Horario horario = controller.getHorarioController().read(Integer.parseInt(idField.getText().trim()));
-            if (horario != null) {
-                JOptionPane.showMessageDialog(centerPanel, horario.toString());
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "Horario no encontrado");
+            try {
+                Horario horario = controller.getHorarioController().read(Integer.parseInt(idField.getText().trim()));
+                if (horario != null) {
+                    JOptionPane.showMessageDialog(centerPanel, horario.toString());
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "Horario no encontrado");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
@@ -138,55 +146,60 @@ public final class HorarioFormDialog extends Dialog {
     }
 
     public void updateHorario() {
-        setSize(660, 460);
+        setSize(500, 460);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idPanel.add(new JLabel("Horario ID:   "));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idPanel.add(new JLabel("Horario ID:         "));
         idField = new TextField(20);
         idPanel.add(idField);
         idPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel diaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        diaPanel.add(new JLabel("Dia:   "));
+        JPanel diaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        diaPanel.add(new JLabel("Dia:                     "));
         diaField = new TextField(20);
         diaPanel.add(diaField);
         diaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel horaInicioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        horaInicioPanel.add(new JLabel("Hora Inicio:        "));
+        JPanel horaInicioPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        horaInicioPanel.add(new JLabel("Hora Inicio:       "));
         horaInicioField = new TextField(20);
         horaInicioPanel.add(horaInicioField);
         horaInicioPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel horaFinPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        horaFinPanel.add(new JLabel("Hora Fin:               "));
+        JPanel horaFinPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        horaFinPanel.add(new JLabel("Hora Fin:            "));
         horaFinField = new TextField(20);
         horaFinPanel.add(horaFinField);
         horaFinPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        idTutorPanel.add(new JLabel("Id Tutor:                                "));
+        JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        idTutorPanel.add(new JLabel("Id Tutor:             "));
         idTutorField = new TextField(20);
         idTutorPanel.add(idTutorField);
         idTutorPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (controller.getHorarioController().update(Integer.parseInt(idField.getText().trim()),
-                    diaField.getText().trim(),
-                    horaInicioField.getText().trim(),
-                    horaFinField.getText().trim(),
-                    controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {
-                JOptionPane.showMessageDialog(centerPanel, "Horario actualizado con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "El Horario no se pudo actualizar");
+            try {
+                if (controller.getHorarioController().update(Integer.parseInt(idField.getText().trim()),
+                        diaField.getText().trim(),
+                        horaInicioField.getText().trim(),
+                        horaFinField.getText().trim(),
+                        controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Horario actualizado con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "El Horario no se pudo actualizar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
+        centerPanel.add(idPanel);
         centerPanel.add(diaPanel);
         centerPanel.add(horaInicioPanel);
         centerPanel.add(Box.createVerticalStrut(10));
@@ -203,7 +216,7 @@ public final class HorarioFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("Horario ID:   "));
         idField = new TextField(20);
         idPanel.add(idField);
@@ -211,12 +224,16 @@ public final class HorarioFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (controller.getHorarioController().delete(Integer.parseInt(idField.getText().trim()))) {
-                JOptionPane.showMessageDialog(centerPanel, "Horario eliminado con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "El Horario no se pudo eliminar");
+            try {
+                if (controller.getHorarioController().delete(Integer.parseInt(idField.getText().trim()))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Horario eliminado con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "El Horario no se pudo eliminar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);

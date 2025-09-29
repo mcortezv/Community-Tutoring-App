@@ -1,5 +1,0 @@
-Pruebas Unitarias
-Hacer las tablas no editables
-Mejorar Validadores
-Ajustar Text Fields
-Fechas y Horas con Calendar

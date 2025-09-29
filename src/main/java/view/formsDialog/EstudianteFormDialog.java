@@ -58,36 +58,36 @@ public final class EstudianteFormDialog extends Dialog {
     }
 
     public void createEstudiante() {
-        setSize(660, 480);
+        setSize(500, 480);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         nombrePanel.add(new JLabel("Nombre Completo:        "));
         nombreField = new TextField(20);
         nombrePanel.add(nombreField);
         nombrePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel gradoEscolarPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel gradoEscolarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         gradoEscolarPanel.add(new JLabel("Grado Escolar:               "));
         gradoEscolarField = new TextField(20);
         gradoEscolarPanel.add(gradoEscolarField);
         gradoEscolarPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel edadPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel edadPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         edadPanel.add(new JLabel("Edad:                                "));
         edadField = new TextField(20);
         edadPanel.add(edadField);
         edadPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel telefonoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel telefonoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         telefonoPanel.add(new JLabel("Telefono:                         "));
         telefonoField = new TextField(20);
         telefonoPanel.add(telefonoField);
         telefonoPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel escuelaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel escuelaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         escuelaPanel.add(new JLabel("Escuela Procedencia:  "));
         escuelaField = new TextField(20);
         escuelaPanel.add(escuelaField);
@@ -95,17 +95,20 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (controller.create(nombreField.getText().trim(),
-                    gradoEscolarField.getText().trim(),
-                    Integer.parseInt(edadField.getText().trim()),
-                    telefonoField.getText().trim(),
-                    escuelaField.getText().trim())) {
-                JOptionPane.showMessageDialog(centerPanel, "Estudiante agregado con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo agregar");
+            try {
+                if (controller.create(nombreField.getText().trim(),
+                        gradoEscolarField.getText().trim(),
+                        Integer.parseInt(edadField.getText().trim()),
+                        telefonoField.getText().trim(),
+                        escuelaField.getText().trim())) {
+                    JOptionPane.showMessageDialog(centerPanel, "Estudiante agregado con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo agregar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-
-            dispose();
         });
 
         centerPanel.add(nombrePanel);
@@ -125,7 +128,7 @@ public final class EstudianteFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("Matricula del Estudiante:   "));
         idField = new TextField(12);
         idPanel.add(idField);
@@ -134,13 +137,17 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnSearch = new Button("Buscar");
         btnSearch.addActionListener(e -> {
-            Estudiante estudiante = controller.read(Integer.parseInt(idField.getText().trim()));
-            if (estudiante != null) {
-                JOptionPane.showMessageDialog(centerPanel, estudiante.toString());
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "Estudiante no encontrado");
+            try {
+                Estudiante estudiante = controller.read(Integer.parseInt(idField.getText().trim()));
+                if (estudiante != null) {
+                    JOptionPane.showMessageDialog(centerPanel, estudiante.toString());
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "Estudiante no encontrado");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
@@ -150,42 +157,42 @@ public final class EstudianteFormDialog extends Dialog {
     }
 
     public void updateEstudiante() {
-        setSize(660, 520);
+        setSize(500, 520);
         setLocationRelativeTo(mainFrame);
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("Matricula Estudiante:   "));
         idField = new TextField(20);
         idPanel.add(idField);
         idPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel nombrePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         nombrePanel.add(new JLabel("Nombre Completo:        "));
         nombreField = new TextField(20);
         nombrePanel.add(nombreField);
         nombrePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel gradoEscolarPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel gradoEscolarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         gradoEscolarPanel.add(new JLabel("Grado Escolar:               "));
         gradoEscolarField = new TextField(20);
         gradoEscolarPanel.add(gradoEscolarField);
         gradoEscolarPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel edadPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel edadPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         edadPanel.add(new JLabel("Edad:                                "));
         edadField = new TextField(20);
         edadPanel.add(edadField);
         edadPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel telefonoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel telefonoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         telefonoPanel.add(new JLabel("Telefono:                         "));
         telefonoField = new TextField(20);
         telefonoPanel.add(telefonoField);
         telefonoPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
-        JPanel escuelaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel escuelaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         escuelaPanel.add(new JLabel("Escuela Procedencia:  "));
         escuelaField = new TextField(20);
         escuelaPanel.add(escuelaField);
@@ -193,17 +200,21 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnUpdate = new Button("Actualizar");
         btnUpdate.addActionListener(e -> {
-            if (controller.update(Integer.parseInt(idField.getText().trim()),
-                    nombreField.getText().trim(),
-                    gradoEscolarField.getText().trim(),
-                    Integer.parseInt(edadField.getText().trim()),
-                    telefonoField.getText().trim(),
-                    escuelaField.getText().trim())) {
-                JOptionPane.showMessageDialog(centerPanel, "Estudiante actualizado con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo actualizar");
+            try {
+                if (controller.update(Integer.parseInt(idField.getText().trim()),
+                        nombreField.getText().trim(),
+                        gradoEscolarField.getText().trim(),
+                        Integer.parseInt(edadField.getText().trim()),
+                        telefonoField.getText().trim(),
+                        escuelaField.getText().trim())) {
+                    JOptionPane.showMessageDialog(centerPanel, "Estudiante actualizado con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo actualizar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
@@ -224,7 +235,7 @@ public final class EstudianteFormDialog extends Dialog {
         setLayout(new BorderLayout());
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         idPanel.add(new JLabel("Matricula del Estudiante:   "));
         idField = new TextField(12);
         idPanel.add(idField);
@@ -233,12 +244,16 @@ public final class EstudianteFormDialog extends Dialog {
 
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
-            if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
-                JOptionPane.showMessageDialog(centerPanel, "Estudiante eliminado con exito");
-            } else {
-                JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo eliminar");
+            try {
+                if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
+                    JOptionPane.showMessageDialog(centerPanel, "Estudiante eliminado con exito");
+                } else {
+                    JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo eliminar");
+                }
+                dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(centerPanel, "Todos los campos son obligatorios");
             }
-            dispose();
         });
 
         centerPanel.add(idPanel);
