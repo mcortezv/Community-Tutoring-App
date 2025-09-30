@@ -8,6 +8,7 @@ import controllers.MainController;
 import models.Estudiante;
 import view.MainFrame;
 import view.styles.Button;
+import view.styles.Style;
 import view.styles.TextField;
 import view.styles.Dialog;
 import java.awt.*;
@@ -23,7 +24,7 @@ public final class EstudianteFormDialog extends Dialog {
     private MainFrame mainFrame;
     private TextField idField;
     private TextField nombreField;
-    private TextField gradoEscolarField;
+    private JComboBox gradoEscolarCombo;
     private TextField edadField;
     private TextField telefonoField;
     private TextField escuelaField;
@@ -70,9 +71,16 @@ public final class EstudianteFormDialog extends Dialog {
         nombrePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel gradoEscolarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        gradoEscolarPanel.add(new JLabel("Grado Escolar:               "));
-        gradoEscolarField = new TextField(20);
-        gradoEscolarPanel.add(gradoEscolarField);
+        gradoEscolarPanel.add(new JLabel("Grado Escolar:                        "));
+        gradoEscolarCombo = new JComboBox();
+        gradoEscolarCombo.setBackground(Style.INPUT_COLOR);
+        gradoEscolarCombo.setForeground(Color.WHITE);
+        gradoEscolarCombo.addItem("General");
+        gradoEscolarCombo.addItem("Primaria");
+        gradoEscolarCombo.addItem("Secundaria");
+        gradoEscolarCombo.addItem("Preparatoria");
+        gradoEscolarCombo.addItem("Universidad");
+        gradoEscolarPanel.add(gradoEscolarCombo);
         gradoEscolarPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel edadPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -97,7 +105,7 @@ public final class EstudianteFormDialog extends Dialog {
         btnCreate.addActionListener(e -> {
             try {
                 if (controller.create(nombreField.getText().trim(),
-                        gradoEscolarField.getText().trim(),
+                        (String) gradoEscolarCombo.getSelectedItem(),
                         Integer.parseInt(edadField.getText().trim()),
                         telefonoField.getText().trim(),
                         escuelaField.getText().trim())) {
@@ -176,8 +184,15 @@ public final class EstudianteFormDialog extends Dialog {
 
         JPanel gradoEscolarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         gradoEscolarPanel.add(new JLabel("Grado Escolar:               "));
-        gradoEscolarField = new TextField(20);
-        gradoEscolarPanel.add(gradoEscolarField);
+        gradoEscolarCombo = new JComboBox();
+        gradoEscolarCombo.setBackground(Style.INPUT_COLOR);
+        gradoEscolarCombo.setForeground(Color.WHITE);
+        gradoEscolarCombo.addItem("General");
+        gradoEscolarCombo.addItem("Primaria");
+        gradoEscolarCombo.addItem("Secundaria");
+        gradoEscolarCombo.addItem("Preparatoria");
+        gradoEscolarCombo.addItem("Universidad");
+        gradoEscolarPanel.add(gradoEscolarCombo);
         gradoEscolarPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel edadPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -203,7 +218,7 @@ public final class EstudianteFormDialog extends Dialog {
             try {
                 if (controller.update(Integer.parseInt(idField.getText().trim()),
                         nombreField.getText().trim(),
-                        gradoEscolarField.getText().trim(),
+                        (String) gradoEscolarCombo.getSelectedItem(),
                         Integer.parseInt(edadField.getText().trim()),
                         telefonoField.getText().trim(),
                         escuelaField.getText().trim())) {
@@ -245,7 +260,7 @@ public final class EstudianteFormDialog extends Dialog {
         Button btnDelete = new Button("Eliminar");
         btnDelete.addActionListener(e -> {
             try {
-                if (!controller.delete(Integer.parseInt(idField.getText().trim()))) {
+                if (controller.delete(Integer.parseInt(idField.getText().trim()))) {
                     JOptionPane.showMessageDialog(centerPanel, "Estudiante eliminado con exito");
                 } else {
                     JOptionPane.showMessageDialog(centerPanel, "El Estudiante no se pudo eliminar");

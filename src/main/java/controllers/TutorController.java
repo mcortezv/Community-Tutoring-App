@@ -122,23 +122,22 @@ public class TutorController {
 
         // Reutilizamos exactamente las mismas validaciones del metodo 'create'.
         if (nombre == null || telefono == null || correo == null || especialidad == null) {
+            JOptionPane.showMessageDialog(null, "Ningún campo puede ser nulo.");
             return false;
         }
         if (nombre.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || especialidad.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ningún campo puede estar vacio.");
             return false;
         }
         if (!Pattern.matches("^[a-zA-Z\\s]+$", nombre)) {
+            JOptionPane.showMessageDialog(null, "El nombre no puede incluir puntos.");
             return false;
         }
         if (!Pattern.matches("\\d{10}", telefono)) {
+            JOptionPane.showMessageDialog(null, "El numero debe de ser de 10 digitos.");
             return false;
         }
-        if (!Pattern.matches("^[\\w._%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$", correo)) {
-            return false;
-        }
-        if (especialidad.trim().length() < 5 || especialidad.trim().length() > 100) {
-            return false;
-        }
+    
         
         // Si todo es correcto, creamos el objeto Tutor (esta vez con el ID)
         Tutor tutor = new Tutor(idTutor, nombre, telefono, correo, especialidad);

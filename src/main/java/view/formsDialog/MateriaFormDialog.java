@@ -8,6 +8,7 @@ import controllers.MateriaController;
 import models.Materia;
 import view.MainFrame;
 import view.styles.Button;
+import view.styles.Style;
 import view.styles.TextField;
 import view.styles.Dialog;
 import java.awt.*;
@@ -23,7 +24,7 @@ public final class MateriaFormDialog extends Dialog {
     private MainFrame mainFrame;
     private TextField idField;
     private TextField nombreField;
-    private TextField nivelField;
+    private JComboBox nivelCombo;
     private TextField descripcionField;
     private MateriaController controller;
 
@@ -69,8 +70,15 @@ public final class MateriaFormDialog extends Dialog {
 
         JPanel nivelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         nivelPanel.add(new JLabel("Nivel:                "));
-        nivelField = new TextField(20);
-        nivelPanel.add(nivelField);
+        nivelCombo = new JComboBox();
+        nivelCombo.setBackground(Style.INPUT_COLOR);
+        nivelCombo.setForeground(Color.WHITE);
+        nivelCombo.addItem("General");
+        nivelCombo.addItem("Primaria");
+        nivelCombo.addItem("Secundaria");
+        nivelCombo.addItem("Preparatoria");
+        nivelCombo.addItem("Universidad");
+        nivelPanel.add(nivelCombo);
         nivelPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel descripcionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -81,9 +89,9 @@ public final class MateriaFormDialog extends Dialog {
 
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
-            if (!nombreField.getText().trim().isBlank() || !nivelField.getText().trim().isBlank() || !descripcionField.getText().trim().isBlank()) {
+            if (!nombreField.getText().trim().isBlank() || !descripcionField.getText().trim().isBlank()) {
                 if (controller.create(nombreField.getText().trim(),
-                        nivelField.getText().trim(),
+                        (String) nivelCombo.getSelectedItem(),
                         descripcionField.getText().trim())) {
                     JOptionPane.showMessageDialog(centerPanel, "Materia agregada con exito");
                 } else {
@@ -158,8 +166,15 @@ public final class MateriaFormDialog extends Dialog {
 
         JPanel nivelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         nivelPanel.add(new JLabel("Nivel:                "));
-        nivelField = new TextField(20);
-        nivelPanel.add(nivelField);
+        nivelCombo = new JComboBox();
+        nivelCombo.setBackground(Style.INPUT_COLOR);
+        nivelCombo.setForeground(Color.WHITE);
+        nivelCombo.addItem("General");
+        nivelCombo.addItem("Primaria");
+        nivelCombo.addItem("Secundaria");
+        nivelCombo.addItem("Preparatoria");
+        nivelCombo.addItem("Universidad");
+        nivelPanel.add(nivelCombo);
         nivelPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel descripcionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -173,7 +188,7 @@ public final class MateriaFormDialog extends Dialog {
             try {
                 if (controller.update(Integer.parseInt(idField.getText().trim()),
                         nombreField.getText().trim(),
-                        nivelField.getText().trim(),
+                        (String) nivelCombo.getSelectedItem(),
                         descripcionField.getText().trim())) {
                     JOptionPane.showMessageDialog(centerPanel, "Materia actualizada con exito");
                 } else {

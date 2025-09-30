@@ -7,6 +7,7 @@ import controllers.MainController;
 import models.Horario;
 import view.MainFrame;
 import view.styles.Button;
+import view.styles.Style;
 import view.styles.TextField;
 import view.styles.Dialog;
 import java.awt.*;
@@ -21,7 +22,7 @@ public final class HorarioFormDialog extends Dialog {
     private JPanel southPanel;
     private MainFrame mainFrame;
     private TextField idField;
-    private TextField diaField;
+    private JComboBox diaCombo;
     private TextField horaInicioField;
     private TextField horaFinField;
     private TextField idTutorField;
@@ -63,8 +64,15 @@ public final class HorarioFormDialog extends Dialog {
 
         JPanel diaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         diaPanel.add(new JLabel("Dia:                       "));
-        diaField = new TextField(20);
-        diaPanel.add(diaField);
+        diaCombo = new JComboBox();
+        diaCombo.setBackground(Style.INPUT_COLOR);
+        diaPanel.setForeground(Color.WHITE);
+        diaCombo.addItem("Lunes");
+        diaCombo.addItem("Martes");
+        diaCombo.addItem("Miercoles");
+        diaCombo.addItem("Jueves");
+        diaCombo.addItem("Viernes");
+        diaPanel.add(diaCombo);
         diaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel horaInicioPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -88,7 +96,7 @@ public final class HorarioFormDialog extends Dialog {
         Button btnCreate = new Button("Agregar");
         btnCreate.addActionListener(e -> {
             try {
-                if (controller.getHorarioController().create(diaField.getText().trim(),
+                if (controller.getHorarioController().create((String) diaCombo.getSelectedItem(),
                         horaInicioField.getText().trim(),
                         horaFinField.getText().trim(),
                         controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {
@@ -159,8 +167,15 @@ public final class HorarioFormDialog extends Dialog {
 
         JPanel diaPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         diaPanel.add(new JLabel("Dia:                     "));
-        diaField = new TextField(20);
-        diaPanel.add(diaField);
+        diaCombo = new JComboBox();
+        diaCombo.setBackground(Style.INPUT_COLOR);
+        diaCombo.setForeground(Color.WHITE);
+        diaCombo.addItem("Lunes");
+        diaCombo.addItem("Martes");
+        diaCombo.addItem("Miercoles");
+        diaCombo.addItem("Jueves");
+        diaCombo.addItem("Viernes");
+        diaPanel.add(diaCombo);
         diaPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel horaInicioPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -185,7 +200,7 @@ public final class HorarioFormDialog extends Dialog {
         btnUpdate.addActionListener(e -> {
             try {
                 if (controller.getHorarioController().update(Integer.parseInt(idField.getText().trim()),
-                        diaField.getText().trim(),
+                        (String) diaCombo.getSelectedItem(),
                         horaInicioField.getText().trim(),
                         horaFinField.getText().trim(),
                         controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())))) {

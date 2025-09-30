@@ -7,6 +7,7 @@ import controllers.MainController;
 import models.Tutoria;
 import view.MainFrame;
 import view.styles.Button;
+import view.styles.Style;
 import view.styles.TextField;
 import view.styles.Dialog;
 import java.awt.*;
@@ -23,7 +24,7 @@ public final class TutoriaFormDialog extends Dialog {
     private TextField idField;
     private TextField fechaField;
     private TextField horaField;
-    private TextField estadoField;
+    private JComboBox estadoCombo;
     private TextField idTutorField;
     private TextField idEstudianteField;
     private TextField idMateriaField;
@@ -77,8 +78,13 @@ public final class TutoriaFormDialog extends Dialog {
 
         JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         estadoPanel.add(new JLabel("Estado:                    "));
-        estadoField = new TextField(20);
-        estadoPanel.add(estadoField);
+        estadoCombo = new JComboBox();
+        estadoCombo.setBackground(Style.INPUT_COLOR);
+        estadoCombo.setForeground(Color.WHITE);
+        estadoCombo.addItem("Programada");
+        estadoCombo.addItem("En Curso");
+        estadoCombo.addItem("Completada");
+        estadoPanel.add(estadoCombo);
         estadoPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -104,7 +110,7 @@ public final class TutoriaFormDialog extends Dialog {
             try {
                 if (controller.getTutoriaController().create(fechaField.getText().trim(),
                         horaField.getText().trim(),
-                        estadoField.getText().trim(),
+                        (String) estadoCombo.getSelectedItem(),
                         controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
                         controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
                         controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
@@ -190,8 +196,14 @@ public final class TutoriaFormDialog extends Dialog {
 
         JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         estadoPanel.add(new JLabel("Estado:                    "));
-        estadoField = new TextField(20);
-        estadoPanel.add(estadoField);
+        estadoCombo = new JComboBox();
+        estadoCombo.setBackground(Style.INPUT_COLOR);
+        estadoCombo.setBackground(Style.INPUT_COLOR);
+        estadoCombo.setForeground(Color.WHITE);
+        estadoCombo.addItem("Programada");
+        estadoCombo.addItem("En Curso");
+        estadoCombo.addItem("Completada");
+        estadoPanel.add(estadoCombo);
         estadoPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, -15, 0));
 
         JPanel idTutorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -218,7 +230,7 @@ public final class TutoriaFormDialog extends Dialog {
                 if (controller.getTutoriaController().update(Integer.parseInt(idField.getText().trim()),
                         fechaField.getText().trim(),
                         horaField.getText().trim(),
-                        estadoField.getText().trim(),
+                        (String) estadoCombo.getSelectedItem(),
                         controller.getTutorController().read(Integer.parseInt(idTutorField.getText().trim())),
                         controller.getEstudianteController().read(Integer.parseInt(idEstudianteField.getText().trim())),
                         controller.getMateriaController().read(Integer.parseInt(idMateriaField.getText().trim())))) {
